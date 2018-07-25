@@ -23,6 +23,7 @@
       "s-ng-utils/*": [
         "dist/s-ng-utils/*"
       ]
-    }
+    },
+    "strict": true
   }
 }
