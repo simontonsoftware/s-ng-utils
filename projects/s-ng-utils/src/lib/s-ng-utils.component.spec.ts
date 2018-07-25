@@ -8,9 +8,8 @@ describe('SNgUtilsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SNgUtilsComponent ]
-    })
-    .compileComponents();
+      declarations: [SNgUtilsComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

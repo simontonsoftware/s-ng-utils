@@ -9,7 +9,10 @@ describe('SNgUtilsService', () => {
     });
   });
 
-  it('should be created', inject([SNgUtilsService], (service: SNgUtilsService) => {
-    expect(service).toBeTruthy();
-  }));
+  it('should be created', inject(
+    [SNgUtilsService],
+    (service: SNgUtilsService) => {
+      expect(service).toBeTruthy();
+    }
+  ));
 });

@@ -10,10 +10,7 @@ import { Component, OnInit } from '@angular/core';
   styles: []
 })
 export class SNgUtilsComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
