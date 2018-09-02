@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "prettier-all": "prettier --write \"**/*.{ts,js,json,md,scss,yml}\""
   },
   "private": true,
   "dependencies": {
@@ -42,7 +43,7 @@
     "karma-jasmine": "~1.1.1",
     "karma-jasmine-html-reporter": "^0.2.2",
     "ng-packagr": "^3.0.0-rc.2",
-    "prettier": "^1.13.7",
+    "prettier": "^1.14.2",
     "protractor": "~5.3.0",
     "ts-node": "~5.0.1",
     "tsickle": ">=0.25.5",
@@ -51,6 +52,7 @@
     "typescript": "~2.7.2"
   },
   "prettier": {
-    "singleQuote": true
+    "trailingComma": "all",
+    "arrowParens": "always"
   }
 }
