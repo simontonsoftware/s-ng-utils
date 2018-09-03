@@ -6,6 +6,6 @@
   "peerDependencies": {
     "@angular/common": ">=6.1.0 <7.0.0",
     "@angular/core": ">=6.1.0 <7.0.0",
-    "s-rxjs-utils": ">= 0.1.0"
+    "s-rxjs-utils": ">= 0.2.0"
   }
 }
