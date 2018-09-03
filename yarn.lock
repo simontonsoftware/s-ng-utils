@@ -4072,6 +4072,12 @@ methods@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/methods/-/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"
 
+micro-dash@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/micro-dash/-/micro-dash-4.2.0.tgz#84da0a853dc6a869cb365b7349518d1b4ed8548b"
+  dependencies:
+    tslib "^1.9.0"
+
 micromatch@^2.1.5, micromatch@^2.3.11:
   version "2.3.11"
   resolved "https://registry.yarnpkg.com/micromatch/-/micromatch-2.3.11.tgz#86677c97d1720b363431d04d0d15293bd38c1565"
@@ -5524,8 +5530,8 @@ rxjs@^6.0.0, rxjs@^6.3.1:
     tslib "^1.9.0"
 
 s-rxjs-utils@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/s-rxjs-utils/-/s-rxjs-utils-0.2.0.tgz#ea05bf5476a0922a7ddc44d6b61d5c624435b88f"
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/s-rxjs-utils/-/s-rxjs-utils-0.2.1.tgz#5c1ead70f46378b566c25e1e7f9cbda044f0fb5c"
   dependencies:
     tslib "^1.9.0"
 

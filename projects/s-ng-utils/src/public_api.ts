@@ -3,3 +3,4 @@
  */
 
 export * from "./lib/auto-destroyable";
+export * from "./lib/form-control-superclass";
