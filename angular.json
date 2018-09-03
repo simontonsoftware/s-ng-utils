@@ -109,7 +109,7 @@
       "root": "projects/s-ng-utils",
       "sourceRoot": "projects/s-ng-utils/src",
       "projectType": "library",
-      "prefix": "lib",
+      "prefix": "s",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
@@ -128,7 +128,8 @@
           "options": {
             "main": "projects/s-ng-utils/src/test.ts",
             "tsConfig": "projects/s-ng-utils/tsconfig.spec.json",
-            "karmaConfig": "projects/s-ng-utils/karma.conf.js"
+            "karmaConfig": "projects/s-ng-utils/karma.conf.js",
+            "sourceMap": true
           }
         },
         "lint": {
