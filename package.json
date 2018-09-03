@@ -8,6 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "docs": "cd docs && typedoc ../projects/s-ng-utils/src",
     "prettier-all": "prettier --write \"**/*.{ts,js,json,md,scss,yml}\""
   },
   "private": true,
@@ -51,6 +52,7 @@
     "tsickle": ">=0.25.5",
     "tslib": "^1.7.1",
     "tslint": "~5.9.1",
+    "typedoc": "^0.12.0",
     "typescript": "~2.9.2"
   },
   "prettier": {
