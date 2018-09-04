@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="E2E Tests" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
+    <config-file value="$PROJECT_DIR$/e2e/protractor.conf.js" />
+    <node-interpreter value="project" />
+    <envs />
+    <method v="2" />
+  </configuration>
+</component>
