@@ -97,13 +97,13 @@ describe("WrappedFormControlSuperclass", () => {
     expect(fixture.componentInstance.emissions).toBe(1);
   }));
 
-  it("is autodestroyable", () => {
+  it("is autodestroyable", fakeAsync(() => {
     init();
     const string = fixture.debugElement.query(By.directive(StringComponent))
       .componentInstance;
     expect(string instanceof AutoDestroyable).toBe(true);
     expect(string.subscribeTo).toBeTruthy();
-  });
+  }));
 });
 
 @Component({
