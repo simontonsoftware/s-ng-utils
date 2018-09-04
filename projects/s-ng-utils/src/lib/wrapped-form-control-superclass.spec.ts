@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Injector } from "@angular/core";
 import {
   ComponentFixture,
   ComponentFixtureAutoDetect,
@@ -7,12 +7,13 @@ import {
   TestBed,
 } from "@angular/core/testing";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { By } from "@angular/platform-browser";
 import { click, find, findButton, setValue } from "../test-helpers";
 import { AutoDestroyable } from "./auto-destroyable";
 import { provideValueAccessor } from "./form-control-superclass";
 import { WrappedFormControlSuperclass } from "./wrapped-form-control-superclass";
 
-fdescribe("WrappedFormControlSuperclass", () => {
+describe("WrappedFormControlSuperclass", () => {
   let fixture: ComponentFixture<TestComponent>;
   let el: HTMLElement;
 
@@ -79,7 +80,7 @@ fdescribe("WrappedFormControlSuperclass", () => {
     expect(stringInput().disabled).toBe(true);
   }));
 
-  fit("does not emit after an incoming change", fakeAsync(() => {
+  it("does not emit after an incoming change", fakeAsync(() => {
     init();
     expect(fixture.componentInstance.emissions).toBe(0);
 
@@ -97,9 +98,11 @@ fdescribe("WrappedFormControlSuperclass", () => {
   }));
 
   it("is autodestroyable", () => {
-    const component = new DateComponent();
-    expect(component instanceof AutoDestroyable).toBe(true);
-    expect(component.subscribeTo).toBeTruthy();
+    init();
+    const string = fixture.debugElement.query(By.directive(StringComponent))
+      .componentInstance;
+    expect(string instanceof AutoDestroyable).toBe(true);
+    expect(string.subscribeTo).toBeTruthy();
   });
 });
 
@@ -128,15 +131,25 @@ class TestComponent {
   selector: `s-string-component`,
   template: `<input [formControl]="formControl" (input)="onTouched()">`,
   providers: [provideValueAccessor(StringComponent)],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-class StringComponent extends WrappedFormControlSuperclass<string> {}
+class StringComponent extends WrappedFormControlSuperclass<string> {
+  constructor(injector: Injector) {
+    super(injector);
+  }
+}
 
 @Component({
   selector: `s-date-component`,
   template: `<input type="datetime-local" [formControl]="formControl">`,
   providers: [provideValueAccessor(DateComponent)],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class DateComponent extends WrappedFormControlSuperclass<Date, string> {
+  constructor(injector: Injector) {
+    super(injector);
+  }
+
   protected innerToOuter(value: string): Date {
     return new Date(value + "Z");
   }

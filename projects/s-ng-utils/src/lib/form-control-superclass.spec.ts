@@ -1,12 +1,13 @@
-import { Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Injector } from "@angular/core";
 import {
   ComponentFixture,
   ComponentFixtureAutoDetect,
   fakeAsync,
+  flushMicrotasks,
   TestBed,
-  tick,
 } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
+import { By } from "@angular/platform-browser";
 import { click, find, findButton } from "../test-helpers";
 import { AutoDestroyable } from "./auto-destroyable";
 import {
@@ -26,7 +27,8 @@ describe("FormControlSuperclass", () => {
     });
     fixture = TestBed.createComponent(TestComponent);
     Object.assign(fixture.componentInstance, initialAttrs);
-    tick();
+    fixture.detectChanges();
+    flushMicrotasks();
     el = fixture.nativeElement;
   }
 
@@ -65,11 +67,13 @@ describe("FormControlSuperclass", () => {
     expect(incrementButton().disabled).toBe(false);
   }));
 
-  it("is autodestroyable", () => {
-    const component = new CounterComponent();
-    expect(component instanceof AutoDestroyable).toBe(true);
-    expect(component.subscribeTo).toBeTruthy();
-  });
+  it("is autodestroyable", fakeAsync(() => {
+    init();
+    const counter = fixture.debugElement.query(By.directive(CounterComponent))
+      .componentInstance;
+    expect(counter instanceof AutoDestroyable).toBe(true);
+    expect(counter.subscribeTo).toBeTruthy();
+  }));
 });
 
 @Component({
@@ -94,16 +98,21 @@ class TestComponent {
     <button (click)="increment()" [disabled]="isDisabled">{{ counter }}</button>
   `,
   providers: [provideValueAccessor(CounterComponent)],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class CounterComponent extends FormControlSuperclass<number> {
   counter = 0;
 
-  writeValue(value: number) {
+  constructor(injector: Injector) {
+    super(injector);
+  }
+
+  handleIncomingValue(value: number) {
     this.counter = value;
   }
 
   increment() {
-    this.onChange(++this.counter);
+    this.emitOutgoingValue(++this.counter);
     this.onTouched();
   }
 }
