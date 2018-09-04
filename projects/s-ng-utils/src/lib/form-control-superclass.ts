@@ -11,6 +11,7 @@ import { AutoDestroyable } from "./auto-destroyable";
  * class MyFormControl extends BaseFormControl {
  *   // ...
  * }
+ * ```
  */
 export function provideValueAccessor(type: Type<any>) {
   return {
@@ -21,7 +22,7 @@ export function provideValueAccessor(type: Type<any>) {
 }
 
 /**
- * Extend this when creating a form control to reduce some boilerplate. **Special note:** You _must_ include a constructor in your subclass.
+ * Extend this when creating a form control to reduce some boilerplate. **Warning:** You _must_ include a constructor in your subclass.
  *
  * This example allows 2-way binding to a number via `[(ngModel)]`, `[formControl]`, or any other technique that leverages the `ControlValueAccessor` interface.
  * ```ts
@@ -71,23 +72,23 @@ export abstract class FormControlSuperclass<T> extends AutoDestroyable
   /** Implement this to handle a new value coming in from outside. */
   abstract handleIncomingValue(value: T): void;
 
-  /** Called as angular propagates values changes to this `ControlValueAccessor`. */
+  /** Called as angular propagates values changes to this `ControlValueAccessor`. You normally do not need to use it. */
   writeValue(value: T) {
     this.handleIncomingValue(value);
     this.changeDetectorRef.markForCheck();
   }
 
-  /** Called as angular sets up the binding to this `ControlValueAccessor`. */
+  /** Called as angular sets up the binding to this `ControlValueAccessor`. You normally do not need to use it. */
   registerOnChange(fn: Function1<T, void>) {
     this.emitOutgoingValue = fn;
   }
 
-  /** Called as angular sets up the binding to this `ControlValueAccessor`. */
+  /** Called as angular sets up the binding to this `ControlValueAccessor`. You normally do not need to use it. */
   registerOnTouched(fn: Function0<void>) {
     this.onTouched = fn;
   }
 
-  /** Called as angular propagates disabled changes to this `ControlValueAccessor`. */
+  /** Called as angular propagates disabled changes to this `ControlValueAccessor`. You normally do not need to use it. */
   setDisabledState(isDisabled: boolean) {
     this.isDisabled = isDisabled;
     this.changeDetectorRef.markForCheck();

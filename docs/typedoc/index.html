@@ -877,11 +877,20 @@ img { max-width: 100%; }
 		<li class=" tsd-kind-class">
 			<a href="classes/autodestroyable.html" class="tsd-kind-icon">Auto<wbr>Destroyable</a>
 		</li>
+		<li class=" tsd-kind-class tsd-has-type-parameter">
+			<a href="classes/formcontrolsuperclass.html" class="tsd-kind-icon">Form<wbr>Control<wbr>Superclass</a>
+		</li>
+		<li class=" tsd-kind-class tsd-has-type-parameter">
+			<a href="classes/wrappedformcontrolsuperclass.html" class="tsd-kind-icon">Wrapped<wbr>Form<wbr>Control<wbr>Superclass</a>
+		</li>
 		<li class=" tsd-kind-variable tsd-is-not-exported">
 			<a href="index.html#context" class="tsd-kind-icon">context</a>
 		</li>
 		<li class=" tsd-kind-variable tsd-is-not-exported">
 			<a href="index.html#require" class="tsd-kind-icon">require</a>
+		</li>
+		<li class=" tsd-kind-function">
+			<a href="index.html#providevalueaccessor" class="tsd-kind-icon">provide<wbr>Value<wbr>Accessor</a>
 		</li>
 	</ul>
 </nav>
@@ -895,6 +904,8 @@ img { max-width: 100%; }
 						<h3>Classes</h3>
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-class"><a href="classes/autodestroyable.html" class="tsd-kind-icon">Auto<wbr>Destroyable</a></li>
+							<li class="tsd-kind-class tsd-has-type-parameter"><a href="classes/formcontrolsuperclass.html" class="tsd-kind-icon">Form<wbr>Control<wbr>Superclass</a></li>
+							<li class="tsd-kind-class tsd-has-type-parameter"><a href="classes/wrappedformcontrolsuperclass.html" class="tsd-kind-icon">Wrapped<wbr>Form<wbr>Control<wbr>Superclass</a></li>
 						</ul>
 					</section>
 					<section class="tsd-index-section tsd-is-not-exported">
@@ -902,6 +913,12 @@ img { max-width: 100%; }
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-variable tsd-is-not-exported"><a href="index.html#context" class="tsd-kind-icon">context</a></li>
 							<li class="tsd-kind-variable tsd-is-not-exported"><a href="index.html#require" class="tsd-kind-icon">require</a></li>
+						</ul>
+					</section>
+					<section class="tsd-index-section ">
+						<h3>Functions</h3>
+						<ul class="tsd-index-list">
+							<li class="tsd-kind-function"><a href="index.html#providevalueaccessor" class="tsd-kind-icon">provide<wbr>Value<wbr>Accessor</a></li>
 						</ul>
 					</section>
 				</div>
@@ -928,6 +945,34 @@ img { max-width: 100%; }
 						<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/test.ts#L12">test.ts:12</a></li>
 					</ul>
 				</aside>
+			</section>
+		</section>
+		<section class="tsd-panel-group tsd-member-group ">
+			<h2>Functions</h2>
+			<section class="tsd-panel tsd-member tsd-kind-function">
+				<a name="providevalueaccessor" class="tsd-anchor"></a>
+				<h3>provide<wbr>Value<wbr>Accessor</h3>
+				<ul class="tsd-signatures tsd-kind-function">
+					<li class="tsd-signature tsd-kind-icon">provide<wbr>Value<wbr>Accessor<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Type</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/form-control-superclass.ts#L16">lib/form-control-superclass.ts:16</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Use in the <code>providers</code> of a component that implements <code>ControlValueAccessor</code> to reduce some boilerplate.</p>
+							</div>
+							<pre><code class="language-ts"><span class="hljs-meta">@Component</span>({ providers: [provideValueAccessor(MyFormControl)] }
+<span class="hljs-keyword">class</span> MyFormControl <span class="hljs-keyword">extends</span> BaseFormControl {
+  <span class="hljs-comment">// ...</span>
+}</code></pre>
+						</div>
+					</li>
+				</ul>
 			</section>
 		</section>
 		<footer class="with-border-bottom">

@@ -3,7 +3,7 @@ import { FormControl } from "@angular/forms";
 import { FormControlSuperclass } from "./form-control-superclass";
 
 /**
- * Extend this when creating a form control that simply wraps an existing form control, to reduce a lot of boilerplate. **Special note:** You _must_ include a constructor in your subclass.
+ * Extend this when creating a form control that simply wraps an existing form control, to reduce a lot of boilerplate. **Warning:** You _must_ include a constructor in your subclass.
  *
  * Example when you don't need to modify the wrapped control's value:
  * ```ts
@@ -48,6 +48,7 @@ export abstract class WrappedFormControlSuperclass<
   OuterType,
   InnerType = OuterType
 > extends FormControlSuperclass<OuterType> {
+  /** Bind this to your inner form control to make all the magic happen. */
   formControl = new FormControl();
 
   constructor(injector: Injector) {
@@ -57,12 +58,12 @@ export abstract class WrappedFormControlSuperclass<
     });
   }
 
-  /** Called as angular propagates values changes to this `ControlValueAccessor`. */
+  /** Called as angular propagates values changes to this `ControlValueAccessor`. You normally do not need to use it. */
   handleIncomingValue(value: OuterType) {
     this.formControl.setValue(this.outerToInner(value), { emitEvent: false });
   }
 
-  /** Called as angular propagates disabled changes to this `ControlValueAccessor`. */
+  /** Called as angular propagates disabled changes to this `ControlValueAccessor`. You normally do not need to use it. */
   setDisabledState(isDisabled: boolean) {
     if (isDisabled) {
       this.formControl.disable({ emitEvent: false });
