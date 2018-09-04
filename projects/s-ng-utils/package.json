@@ -2,6 +2,7 @@
   "name": "s-ng-utils",
   "version": "0.0.1",
   "author": "Simonton Software",
+  "repository": "simontonsoftware/s-ng-utils",
   "license": "MIT",
   "peerDependencies": {
     "@angular/common": ">=6.1.0 <7.0.0",
