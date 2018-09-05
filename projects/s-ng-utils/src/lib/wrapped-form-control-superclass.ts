@@ -8,7 +8,7 @@ import { FormControlSuperclass } from "./form-control-superclass";
  * Example when you don't need to modify the wrapped control's value:
  * ```ts
  * @Component({
- *   template: `<input [formControl]="formControl" (blur)="onTouched()">`,
+ *   template: `<input [formControl]="formControl">`,
  *   providers: [provideValueAccessor(StringComponent)],
  * })
  * class StringComponent extends WrappedFormControlSuperclass<string> {
@@ -56,6 +56,9 @@ export abstract class WrappedFormControlSuperclass<
     this.subscribeTo(this.formControl.valueChanges, (value) => {
       this.emitOutgoingValue(this.innerToOuter(value));
     });
+    this.formControl.markAsTouched = () => {
+      this.onTouched();
+    };
   }
 
   /** Called as angular propagates values changes to this `ControlValueAccessor`. You normally do not need to use it. */

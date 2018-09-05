@@ -130,10 +130,7 @@
             "tsConfig": "projects/s-ng-utils/tsconfig.spec.json",
             "karmaConfig": "projects/s-ng-utils/karma.conf.js",
             "sourceMap": true,
-            "codeCoverageExclude": [
-              "projects/s-ng-utils/src/test.ts",
-              "projects/s-ng-utils/src/test-helpers.ts"
-            ]
+            "codeCoverageExclude": ["**/test.ts", "**/test-helpers.ts"]
           }
         },
         "lint": {

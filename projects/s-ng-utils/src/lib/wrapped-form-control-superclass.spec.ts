@@ -65,7 +65,7 @@ describe("WrappedFormControlSuperclass", () => {
   it("provides help for `onTouched`", fakeAsync(() => {
     init();
     expect(fixture.nativeElement.innerText).not.toContain("Touched!");
-    setValue(stringInput(), "some new value");
+    stringInput().dispatchEvent(new Event("blur"));
     expect(fixture.nativeElement.innerText).toContain("Touched!");
   }));
 
@@ -129,7 +129,7 @@ class TestComponent {
 
 @Component({
   selector: `s-string-component`,
-  template: `<input [formControl]="formControl" (input)="onTouched()">`,
+  template: `<input [formControl]="formControl">`,
   providers: [provideValueAccessor(StringComponent)],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
