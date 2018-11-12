@@ -39,7 +39,9 @@ class DestroyableDirective extends AutoDestroyable {
 }
 
 @Component({
-  template: `<p *ngIf="showThings" sDestroyableDirective>I'm showing.</p>`,
+  template: `
+    <p *ngIf="showThings" sDestroyableDirective>I'm showing.</p>
+  `,
 })
 class TestComponent {
   showThings = true;

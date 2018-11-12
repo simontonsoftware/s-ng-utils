@@ -129,7 +129,9 @@ class TestComponent {
 
 @Component({
   selector: `s-string-component`,
-  template: `<input [formControl]="formControl">`,
+  template: `
+    <input [formControl]="formControl" />
+  `,
   providers: [provideValueAccessor(StringComponent)],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -141,7 +143,9 @@ class StringComponent extends WrappedFormControlSuperclass<string> {
 
 @Component({
   selector: `s-date-component`,
-  template: `<input type="datetime-local" [formControl]="formControl">`,
+  template: `
+    <input type="datetime-local" [formControl]="formControl" />
+  `,
   providers: [provideValueAccessor(DateComponent)],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
