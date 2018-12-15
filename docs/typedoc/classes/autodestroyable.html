@@ -888,6 +888,9 @@ img { max-width: 100%; }
 				</li>
 			</ul>
 		</li>
+		<li class=" tsd-kind-class">
+			<a href="directivesuperclass.html" class="tsd-kind-icon">Directive<wbr>Superclass</a>
+		</li>
 		<li class=" tsd-kind-class tsd-has-type-parameter">
 			<a href="formcontrolsuperclass.html" class="tsd-kind-icon">Form<wbr>Control<wbr>Superclass</a>
 		</li>
@@ -913,8 +916,8 @@ img { max-width: 100%; }
 					<p>Use as the superclass for anything managed by angular&#39;s dependency injection for care-free use of <code>subscribeTo()</code>. It simply calls <code>unsubscribe()</code> during <code>ngOnDestroy()</code>. If you override <code>ngOnDestroy()</code> in your subclass, be sure to invoke the super implementation.</p>
 				</div>
 				<pre><code class="language-ts"><span class="hljs-meta">@Injectable</span>()
-<span class="hljs-comment">// or @Component()</span>
-<span class="hljs-comment">// or @Directive()</span>
+<span class="hljs-comment">// or @Component() (also consider DirectiveSuperclass)</span>
+<span class="hljs-comment">// or @Directive() (also consider DirectiveSuperclass)</span>
 <span class="hljs-comment">// or @Pipe()</span>
 <span class="hljs-keyword">class</span> MyThing <span class="hljs-keyword">extends</span> AutoDestroyable {
   <span class="hljs-keyword">constructor</span>(<span class="hljs-params">somethingObservable: Observable</span>) {
@@ -939,7 +942,7 @@ img { max-width: 100%; }
 							<span class="target">AutoDestroyable</span>
 							<ul class="tsd-hierarchy">
 								<li>
-									<a href="formcontrolsuperclass.html" class="tsd-signature-type">FormControlSuperclass</a>
+									<a href="directivesuperclass.html" class="tsd-signature-type">DirectiveSuperclass</a>
 								</li>
 							</ul>
 						</li>

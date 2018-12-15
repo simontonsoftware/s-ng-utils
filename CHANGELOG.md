@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.3.0"></a>
+
+# [0.3.0](https://github.com/simontonsoftware/s-ng-utils/compare/v0.2.0...v0.3.0) (2018-12-15)
+
+### Features
+
+- `FormControlSuperclass` now extends `DirectiveSuperclass` ([f23a535](https://github.com/simontonsoftware/s-ng-utils/commit/f23a535))
+- add `DirectiveSuperclass` ([b2d0213](https://github.com/simontonsoftware/s-ng-utils/commit/b2d0213))
+
 <a name="0.2.0"></a>
 
 # [0.2.0](https://github.com/simontonsoftware/s-ng-utils/compare/v0.1.0...v0.2.0) (2018-11-12)

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>s-ng-utils | s-ng-utils</title>
+	<title>DirectiveSuperclass | s-ng-utils</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css">/*! normalize.css v1.1.3 | MIT License | git.io/normalize */
@@ -866,7 +866,7 @@ img { max-width: 100%; }
 		<div class="container">
 			<div class="table-wrap">
 				<div class="table-cell">
-					<strong><a href="index.html">s-ng-utils</a></strong>
+					<strong><a href="../index.html">s-ng-utils</a></strong>
 				</div>
 			</div>
 		</div>
@@ -875,106 +875,306 @@ img { max-width: 100%; }
 <nav class="tsd-navigation secondary">
 	<ul>
 		<li class=" tsd-kind-class">
-			<a href="classes/autodestroyable.html" class="tsd-kind-icon">Auto<wbr>Destroyable</a>
+			<a href="autodestroyable.html" class="tsd-kind-icon">Auto<wbr>Destroyable</a>
 		</li>
-		<li class=" tsd-kind-class">
-			<a href="classes/directivesuperclass.html" class="tsd-kind-icon">Directive<wbr>Superclass</a>
+		<li class="current tsd-kind-class">
+			<a href="directivesuperclass.html" class="tsd-kind-icon">Directive<wbr>Superclass</a>
+			<ul>
+				<li class=" tsd-kind-constructor tsd-parent-kind-class">
+					<a href="directivesuperclass.html#constructor" class="tsd-kind-icon">constructor</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+					<a href="directivesuperclass.html#changedetectorref" class="tsd-kind-icon">change<wbr>Detector<wbr>Ref</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-class">
+					<a href="directivesuperclass.html#changedkeys_" class="tsd-kind-icon">changed<wbr>Keys$</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+					<a href="directivesuperclass.html#bindtoinstance" class="tsd-kind-icon">bind<wbr>ToInstance</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+					<a href="directivesuperclass.html#getinput_" class="tsd-kind-icon">get<wbr>Input$</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="directivesuperclass.html#ngonchanges" class="tsd-kind-icon">ng<wbr>OnChanges</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a href="directivesuperclass.html#ngondestroy" class="tsd-kind-icon">ng<wbr>OnDestroy</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited">
+					<a href="directivesuperclass.html#subscribeto" class="tsd-kind-icon">subscribe<wbr>To</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a href="directivesuperclass.html#unsubscribe" class="tsd-kind-icon">unsubscribe</a>
+				</li>
+			</ul>
 		</li>
 		<li class=" tsd-kind-class tsd-has-type-parameter">
-			<a href="classes/formcontrolsuperclass.html" class="tsd-kind-icon">Form<wbr>Control<wbr>Superclass</a>
+			<a href="formcontrolsuperclass.html" class="tsd-kind-icon">Form<wbr>Control<wbr>Superclass</a>
 		</li>
 		<li class=" tsd-kind-class tsd-has-type-parameter">
-			<a href="classes/wrappedformcontrolsuperclass.html" class="tsd-kind-icon">Wrapped<wbr>Form<wbr>Control<wbr>Superclass</a>
+			<a href="wrappedformcontrolsuperclass.html" class="tsd-kind-icon">Wrapped<wbr>Form<wbr>Control<wbr>Superclass</a>
 		</li>
 		<li class=" tsd-kind-variable tsd-is-not-exported">
-			<a href="index.html#context" class="tsd-kind-icon">context</a>
+			<a href="../index.html#context" class="tsd-kind-icon">context</a>
 		</li>
 		<li class=" tsd-kind-variable tsd-is-not-exported">
-			<a href="index.html#require" class="tsd-kind-icon">require</a>
+			<a href="../index.html#require" class="tsd-kind-icon">require</a>
 		</li>
 		<li class=" tsd-kind-function">
-			<a href="index.html#providevalueaccessor" class="tsd-kind-icon">provide<wbr>Value<wbr>Accessor</a>
+			<a href="../index.html#providevalueaccessor" class="tsd-kind-icon">provide<wbr>Value<wbr>Accessor</a>
 		</li>
 	</ul>
 </nav>
 <div class="container container-main">
 	<div class="content-wrap">
+		<section class="tsd-panel tsd-comment">
+			<div class="tsd-comment tsd-typography">
+				<div class="lead">
+					<p>Extend this when creating a directive (including a component, which is a kind of directive) to gain access to the helpers demonstrated below. <strong>Warning:</strong> You <em>must</em> include a constructor in your subclass.</p>
+				</div>
+				<pre><code class="language-ts"><span class="hljs-meta">@Component</span>({
+  selector: <span class="hljs-string">"s-color-text"</span>,
+  template: <span class="hljs-string">`
+    &lt;span [style.background]="color"&gt;{{ color }}&lt;/span&gt;
+  `</span>,
+  <span class="hljs-comment">// note that `bindToInstance()` works even with OnPush change detection</span>
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+ <span class="hljs-keyword">class</span> ColorTextComponent <span class="hljs-keyword">extends</span> DirectiveSuperclass {
+  <span class="hljs-meta">@Input</span>() prefix?: <span class="hljs-built_in">string</span>;
+  <span class="hljs-meta">@Input</span>() prefix2?: <span class="hljs-built_in">string</span>;
+  color!: <span class="hljs-built_in">string</span>;
+
+  <span class="hljs-comment">// Even if you don't need extra arguments injector, you must still include a constructor. It is required for angular to provide `Injector`.</span>
+  <span class="hljs-keyword">constructor</span>(<span class="hljs-params">
+    <span class="hljs-meta">@Inject</span>(<span class="hljs-string">"color$"</span>) color$: Observable&lt;<span class="hljs-built_in">string</span>&gt;,
+    injector: Injector,
+  </span>) {
+    <span class="hljs-keyword">super</span>(injector);
+
+    <span class="hljs-comment">// combine everything to calculate `color` and keep it up to date</span>
+    <span class="hljs-keyword">this</span>.bindToInstance(
+      <span class="hljs-string">"color"</span>,
+      combineLatest(
+        <span class="hljs-keyword">this</span>.getInput$(<span class="hljs-string">"prefix"</span>),
+        <span class="hljs-keyword">this</span>.getInput$(<span class="hljs-string">"prefix2"</span>),
+        color$,
+      ).pipe(map(<span class="hljs-function">(<span class="hljs-params">parts</span>) =&gt;</span> parts.filter(<span class="hljs-function">(<span class="hljs-params">p</span>) =&gt;</span> p).join(<span class="hljs-string">""</span>))),
+    );
+  }
+}</code></pre>
+			</div>
+		</section>
+		<section class="tsd-panel tsd-hierarchy">
+			<h3>Hierarchy</h3>
+			<ul class="tsd-hierarchy">
+				<li>
+					<a href="autodestroyable.html" class="tsd-signature-type">AutoDestroyable</a>
+					<ul class="tsd-hierarchy">
+						<li>
+							<span class="target">DirectiveSuperclass</span>
+							<ul class="tsd-hierarchy">
+								<li>
+									<a href="formcontrolsuperclass.html" class="tsd-signature-type">FormControlSuperclass</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</section>
+		<section class="tsd-panel">
+			<h3>Implements</h3>
+			<ul class="tsd-hierarchy">
+				<li><span class="tsd-signature-type">Unsubscribable</span></li>
+				<li><span class="tsd-signature-type">OnDestroy</span></li>
+				<li><span class="tsd-signature-type">OnChanges</span></li>
+			</ul>
+		</section>
 		<section class="tsd-panel-group tsd-index-group">
 			<h2>Index</h2>
 			<section class="tsd-panel tsd-index-panel">
 				<div class="tsd-index-content">
 					<section class="tsd-index-section ">
-						<h3>Classes</h3>
+						<h3>Constructors</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-class"><a href="classes/autodestroyable.html" class="tsd-kind-icon">Auto<wbr>Destroyable</a></li>
-							<li class="tsd-kind-class"><a href="classes/directivesuperclass.html" class="tsd-kind-icon">Directive<wbr>Superclass</a></li>
-							<li class="tsd-kind-class tsd-has-type-parameter"><a href="classes/formcontrolsuperclass.html" class="tsd-kind-icon">Form<wbr>Control<wbr>Superclass</a></li>
-							<li class="tsd-kind-class tsd-has-type-parameter"><a href="classes/wrappedformcontrolsuperclass.html" class="tsd-kind-icon">Wrapped<wbr>Form<wbr>Control<wbr>Superclass</a></li>
-						</ul>
-					</section>
-					<section class="tsd-index-section tsd-is-not-exported">
-						<h3>Variables</h3>
-						<ul class="tsd-index-list">
-							<li class="tsd-kind-variable tsd-is-not-exported"><a href="index.html#context" class="tsd-kind-icon">context</a></li>
-							<li class="tsd-kind-variable tsd-is-not-exported"><a href="index.html#require" class="tsd-kind-icon">require</a></li>
+							<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="directivesuperclass.html#constructor" class="tsd-kind-icon">constructor</a></li>
 						</ul>
 					</section>
 					<section class="tsd-index-section ">
-						<h3>Functions</h3>
+						<h3>Properties</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-function"><a href="index.html#providevalueaccessor" class="tsd-kind-icon">provide<wbr>Value<wbr>Accessor</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="directivesuperclass.html#changedetectorref" class="tsd-kind-icon">change<wbr>Detector<wbr>Ref</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class"><a href="directivesuperclass.html#changedkeys_" class="tsd-kind-icon">changed<wbr>Keys$</a></li>
+						</ul>
+					</section>
+					<section class="tsd-index-section ">
+						<h3>Methods</h3>
+						<ul class="tsd-index-list">
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="directivesuperclass.html#bindtoinstance" class="tsd-kind-icon">bind<wbr>ToInstance</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="directivesuperclass.html#getinput_" class="tsd-kind-icon">get<wbr>Input$</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="directivesuperclass.html#ngonchanges" class="tsd-kind-icon">ng<wbr>OnChanges</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="directivesuperclass.html#ngondestroy" class="tsd-kind-icon">ng<wbr>OnDestroy</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited"><a href="directivesuperclass.html#subscribeto" class="tsd-kind-icon">subscribe<wbr>To</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="directivesuperclass.html#unsubscribe" class="tsd-kind-icon">unsubscribe</a></li>
 						</ul>
 					</section>
 				</div>
 			</section>
 		</section>
-		<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
-			<h2>Variables</h2>
-			<section class="tsd-panel tsd-member tsd-kind-variable tsd-is-not-exported">
-				<a name="context" class="tsd-anchor"></a>
-				<h3><span class="tsd-flag ts-flagConst">Const</span> context</h3>
-				<div class="tsd-signature tsd-kind-icon">context<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;require.context(&quot;./&quot;, true, /\.spec\.ts$/)</span></div>
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/test.ts#L20">test.ts:20</a></li>
-					</ul>
-				</aside>
-			</section>
-			<section class="tsd-panel tsd-member tsd-kind-variable tsd-is-not-exported">
-				<a name="require" class="tsd-anchor"></a>
-				<h3><span class="tsd-flag ts-flagConst">Const</span> require</h3>
-				<div class="tsd-signature tsd-kind-icon">require<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/test.ts#L12">test.ts:12</a></li>
-					</ul>
-				</aside>
-			</section>
-		</section>
 		<section class="tsd-panel-group tsd-member-group ">
-			<h2>Functions</h2>
-			<section class="tsd-panel tsd-member tsd-kind-function">
-				<a name="providevalueaccessor" class="tsd-anchor"></a>
-				<h3>provide<wbr>Value<wbr>Accessor</h3>
-				<ul class="tsd-signatures tsd-kind-function">
-					<li class="tsd-signature tsd-kind-icon">provide<wbr>Value<wbr>Accessor<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Type</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></li>
+			<h2>Constructors</h2>
+			<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+				<a name="constructor" class="tsd-anchor"></a>
+				<h3>constructor</h3>
+				<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">new <wbr>Directive<wbr>Superclass<span class="tsd-signature-symbol">(</span>injector<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Injector</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="directivesuperclass.html" class="tsd-signature-type">DirectiveSuperclass</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/form-control-superclass.ts#L16">lib/form-control-superclass.ts:16</a></li>
+								<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/directive-superclass.ts#L53">lib/directive-superclass.ts:53</a></li>
+							</ul>
+						</aside>
+					</li>
+				</ul>
+			</section>
+		</section>
+		<section class="tsd-panel-group tsd-member-group ">
+			<h2>Properties</h2>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+				<a name="changedetectorref" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagProtected">Protected</span> change<wbr>Detector<wbr>Ref</h3>
+				<div class="tsd-signature tsd-kind-icon">change<wbr>Detector<wbr>Ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ChangeDetectorRef</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/directive-superclass.ts#L53">lib/directive-superclass.ts:53</a></li>
+					</ul>
+				</aside>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+				<a name="changedkeys_" class="tsd-anchor"></a>
+				<h3>changed<wbr>Keys$</h3>
+				<div class="tsd-signature tsd-kind-icon">changed<wbr>Keys$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">keyof this</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;new Subject&lt;Set&lt;keyof this&gt;&gt;()</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/directive-superclass.ts#L51">lib/directive-superclass.ts:51</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Emits the set of <code>@Input()</code> property names that change during each call to <code>ngOnChanges()</code>.</p>
+					</div>
+				</div>
+			</section>
+		</section>
+		<section class="tsd-panel-group tsd-member-group ">
+			<h2>Methods</h2>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+				<a name="bindtoinstance" class="tsd-anchor"></a>
+				<h3>bind<wbr>ToInstance</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+					<li class="tsd-signature tsd-kind-icon">bind<wbr>ToInstance&lt;K&gt;<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">K</span>, value$<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">this[K]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/directive-superclass.ts#L76">lib/directive-superclass.ts:76</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Use in the <code>providers</code> of a component that implements <code>ControlValueAccessor</code> to reduce some boilerplate.</p>
+								<p> Binds an observable to one of this directive&#39;s instance variables. When the observable emits the instance variable will be updated, and change detection will be triggered to propagate any changes. Use this an an alternative to repeating <code>| async</code> multiple times in your template.</p>
 							</div>
-							<pre><code class="language-ts"><span class="hljs-meta">@Component</span>({ providers: [provideValueAccessor(MyFormControl)] }
-<span class="hljs-keyword">class</span> MyFormControl <span class="hljs-keyword">extends</span> BaseFormControl {
-  <span class="hljs-comment">// ...</span>
-}</code></pre>
 						</div>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+				<a name="getinput_" class="tsd-anchor"></a>
+				<h3>get<wbr>Input$</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+					<li class="tsd-signature tsd-kind-icon">get<wbr>Input$&lt;K&gt;<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">this[K]</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/directive-superclass.ts#L67">lib/directive-superclass.ts:67</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+						</div>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="ngonchanges" class="tsd-anchor"></a>
+				<h3>ng<wbr>OnChanges</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">ng<wbr>OnChanges<span class="tsd-signature-symbol">(</span>changes<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SimpleChanges</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/directive-superclass.ts#L60">lib/directive-superclass.ts:60</a></li>
+							</ul>
+						</aside>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+				<a name="ngondestroy" class="tsd-anchor"></a>
+				<h3>ng<wbr>OnDestroy</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<li class="tsd-signature tsd-kind-icon">ng<wbr>OnDestroy<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<p>Inherited from <a href="autodestroyable.html">AutoDestroyable</a>.<a href="autodestroyable.html#ngondestroy">ngOnDestroy</a></p>
+							<ul>
+								<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/auto-destroyable.ts#L27">lib/auto-destroyable.ts:27</a></li>
+							</ul>
+						</aside>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited">
+				<a name="subscribeto" class="tsd-anchor"></a>
+				<h3>subscribe<wbr>To</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited">
+					<li class="tsd-signature tsd-kind-icon">subscribe<wbr>To&lt;T&gt;<span class="tsd-signature-symbol">(</span>observable<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span>, next<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span>, error<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span>, complete<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<p>Inherited from SubscriptionManager.subscribeTo</p>
+							<ul>
+								<li>Defined in C:/Users/xemno/IdeaProjects/s-ng-utils/node_modules/s-rxjs-utils/lib/subscription-manager.d.ts:23</li>
+							</ul>
+						</aside>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+				<a name="unsubscribe" class="tsd-anchor"></a>
+				<h3>unsubscribe</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<li class="tsd-signature tsd-kind-icon">unsubscribe<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<p>Inherited from SubscriptionManager.unsubscribe</p>
+							<ul>
+								<li>Defined in C:/Users/xemno/IdeaProjects/s-ng-utils/node_modules/s-rxjs-utils/lib/subscription-manager.d.ts:24</li>
+							</ul>
+						</aside>
 					</li>
 				</ul>
 			</section>
