@@ -9,7 +9,7 @@ import { filter, map } from "rxjs/operators";
 import { AutoDestroyable } from "./auto-destroyable";
 
 /**
- * Extend this when creating a directive (including a component, which is a kind of directive) to gain access to the helpers demonstrated below.
+ * Extend this when creating a directive (including a component, which is a kind of directive) to gain access to the helpers demonstrated below. **Warning:** You _must_ include a constructor in your subclass.
  *
  * ```ts
  * @Component({
@@ -25,6 +25,7 @@ import { AutoDestroyable } from "./auto-destroyable";
  *   @Input() prefix2?: string;
  *   color!: string;
  *
+ *   // Even if you don't need extra arguments injector, you must still include a constructor. It is required for angular to provide `Injector`.
  *   constructor(
  *     @Inject("color$") color$: Observable<string>,
  *     injector: Injector,
