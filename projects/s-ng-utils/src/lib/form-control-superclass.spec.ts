@@ -10,6 +10,7 @@ import { FormsModule } from "@angular/forms";
 import { By } from "@angular/platform-browser";
 import { click, find, findButton } from "../test-helpers";
 import { AutoDestroyable } from "./auto-destroyable";
+import { DirectiveSuperclass } from "./directive-superclass";
 import {
   FormControlSuperclass,
   provideValueAccessor,
@@ -67,12 +68,12 @@ describe("FormControlSuperclass", () => {
     expect(incrementButton().disabled).toBe(false);
   }));
 
-  it("is autodestroyable", fakeAsync(() => {
+  it("has the right class hierarchy", fakeAsync(() => {
     init();
     const counter = fixture.debugElement.query(By.directive(CounterComponent))
       .componentInstance;
     expect(counter instanceof AutoDestroyable).toBe(true);
-    expect(counter.subscribeTo).toBeTruthy();
+    expect(counter instanceof DirectiveSuperclass).toBe(true);
   }));
 });
 

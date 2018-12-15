@@ -1,7 +1,7 @@
-import { Type, Injector, ChangeDetectorRef } from "@angular/core";
+import { Type } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { Function0, Function1, noop } from "micro-dash";
-import { AutoDestroyable } from "./auto-destroyable";
+import { DirectiveSuperclass } from "./directive-superclass";
 
 /**
  * Use in the `providers` of a component that implements `ControlValueAccessor` to reduce some boilerplate.
@@ -51,7 +51,7 @@ export function provideValueAccessor(type: Type<any>) {
  * }
  * ```
  */
-export abstract class FormControlSuperclass<T> extends AutoDestroyable
+export abstract class FormControlSuperclass<T> extends DirectiveSuperclass
   implements ControlValueAccessor {
   /** Call this to emit a new value when it changes. */
   emitOutgoingValue: (value: T) => void = noop;
@@ -61,13 +61,6 @@ export abstract class FormControlSuperclass<T> extends AutoDestroyable
 
   /** You can bind to this in your template as needed. */
   isDisabled = false;
-
-  private changeDetectorRef: ChangeDetectorRef;
-
-  constructor(injector: Injector) {
-    super();
-    this.changeDetectorRef = injector.get(ChangeDetectorRef);
-  }
 
   /** Implement this to handle a new value coming in from outside. */
   abstract handleIncomingValue(value: T): void;

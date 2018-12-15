@@ -10,7 +10,11 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { By } from "@angular/platform-browser";
 import { click, find, findButton, setValue } from "../test-helpers";
 import { AutoDestroyable } from "./auto-destroyable";
-import { provideValueAccessor } from "./form-control-superclass";
+import { DirectiveSuperclass } from "./directive-superclass";
+import {
+  FormControlSuperclass,
+  provideValueAccessor,
+} from "./form-control-superclass";
 import { WrappedFormControlSuperclass } from "./wrapped-form-control-superclass";
 
 describe("WrappedFormControlSuperclass", () => {
@@ -97,12 +101,13 @@ describe("WrappedFormControlSuperclass", () => {
     expect(fixture.componentInstance.emissions).toBe(1);
   }));
 
-  it("is autodestroyable", fakeAsync(() => {
+  it("has the right class hierarchy", fakeAsync(() => {
     init();
     const string = fixture.debugElement.query(By.directive(StringComponent))
       .componentInstance;
     expect(string instanceof AutoDestroyable).toBe(true);
-    expect(string.subscribeTo).toBeTruthy();
+    expect(string instanceof DirectiveSuperclass).toBe(true);
+    expect(string instanceof FormControlSuperclass).toBe(true);
   }));
 });
 
