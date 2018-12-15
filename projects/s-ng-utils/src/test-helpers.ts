@@ -8,7 +8,7 @@ export function findButton(
   const found = fixture.debugElement.query(
     (candidate) =>
       candidate.nativeElement.nodeName === "BUTTON" &&
-      candidate.nativeElement.textContent === "Toggle Disabled",
+      candidate.nativeElement.textContent.trim() === text,
   );
   if (found) {
     return found.nativeElement;

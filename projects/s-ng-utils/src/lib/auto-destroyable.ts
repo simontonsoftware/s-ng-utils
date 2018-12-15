@@ -6,8 +6,8 @@ import { SubscriptionManager } from "s-rxjs-utils";
  *
  * ```ts
  * @Injectable()
- * // or @Component()
- * // or @Directive()
+ * // or @Component() (also consider DirectiveSuperclass)
+ * // or @Directive() (also consider DirectiveSuperclass)
  * // or @Pipe()
  * class MyThing extends AutoDestroyable {
  *   constructor(somethingObservable: Observable) {

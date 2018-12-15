@@ -116,7 +116,7 @@ describe("WrappedFormControlSuperclass", () => {
     ></s-string-component>
     <div *ngIf="stringControl.touched">Touched!</div>
     <button (click)="shouldDisable = !shouldDisable">Toggle Disabled</button>
-    <hr>
+    <hr />
     <s-date-component [(ngModel)]="date"></s-date-component>
   `,
 })
