@@ -4,7 +4,8 @@ import {
   Injector,
   ChangeDetectorRef,
 } from "@angular/core";
-import { Observable, Subject } from "rxjs";
+import { keys } from "micro-dash/lib/object/keys";
+import { BehaviorSubject, Observable, Subject } from "rxjs";
 import { filter, map } from "rxjs/operators";
 import { AutoDestroyable } from "./auto-destroyable";
 
@@ -48,7 +49,8 @@ import { AutoDestroyable } from "./auto-destroyable";
 export abstract class DirectiveSuperclass extends AutoDestroyable
   implements OnChanges {
   /** Emits the set of `@Input()` property names that change during each call to `ngOnChanges()`. */
-  changedKeys$ = new Subject<Set<keyof this>>();
+  // lastChangedKeys$ = new Subject<Set<keyof this>>();
+  lastChangedKeys$ = new BehaviorSubject<Set<keyof this>>(new Set());
 
   protected changeDetectorRef: ChangeDetectorRef;
 
@@ -58,14 +60,14 @@ export abstract class DirectiveSuperclass extends AutoDestroyable
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.changedKeys$.next(
+    this.lastChangedKeys$.next(
       new Set(Object.getOwnPropertyNames(changes) as Array<keyof this>),
     );
   }
 
   /** @return an observable of the values for one of this directive's `@Input()` properties */
   getInput$<K extends keyof this>(key: K): Observable<this[K]> {
-    return this.changedKeys$.pipe(
+    return this.lastChangedKeys$.pipe(
       filter((keys) => keys.has(key)),
       map(() => this[key]),
     );

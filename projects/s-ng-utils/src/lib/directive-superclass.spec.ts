@@ -65,23 +65,25 @@ describe("DirectiveSuperclass", () => {
 
   /////////
 
-  describe(".changedKeys$", () => {
+  describe(".lastChangedKeys$", () => {
     it("emits the keys that change", fakeAsync(() => {
       init();
       const stub = jasmine.createSpy();
-      colorTextComponent.changedKeys$.subscribe(stub);
+      colorTextComponent.lastChangedKeys$.subscribe(stub);
+      expect(stub).toHaveBeenCalledTimes(1);
+      expect(stub.calls.argsFor(0)).toEqual([new Set(["prefix", "prefix2"])]);
 
       click(darkButton());
-      expect(stub).toHaveBeenCalledTimes(1);
-      expect(stub).toHaveBeenCalledWith(new Set(["prefix"]));
+      expect(stub).toHaveBeenCalledTimes(2);
+      expect(stub.calls.argsFor(1)).toEqual([new Set(["prefix"])]);
 
       click(slateButton());
-      expect(stub).toHaveBeenCalledTimes(2);
-      expect(stub).toHaveBeenCalledWith(new Set(["prefix2"]));
+      expect(stub).toHaveBeenCalledTimes(3);
+      expect(stub.calls.argsFor(2)).toEqual([new Set(["prefix2"])]);
 
       click(bothButton());
-      expect(stub).toHaveBeenCalledTimes(3);
-      expect(stub).toHaveBeenCalledWith(new Set(["prefix", "prefix2"]));
+      expect(stub).toHaveBeenCalledTimes(4);
+      expect(stub.calls.argsFor(3)).toEqual([new Set(["prefix", "prefix2"])]);
     }));
   });
 
@@ -90,17 +92,19 @@ describe("DirectiveSuperclass", () => {
       init();
       const stub = jasmine.createSpy();
       colorTextComponent.getInput$("prefix2").subscribe(stub);
+      expect(stub).toHaveBeenCalledTimes(1);
+      expect(stub.calls.argsFor(0)).toEqual([undefined]);
 
       click(darkButton());
-      expect(stub).not.toHaveBeenCalled();
+      expect(stub).toHaveBeenCalledTimes(1);
 
       click(slateButton());
-      expect(stub).toHaveBeenCalledTimes(1);
-      expect(stub).toHaveBeenCalledWith("Slate");
+      expect(stub).toHaveBeenCalledTimes(2);
+      expect(stub.calls.argsFor(1)).toEqual(["Slate"]);
 
       click(bothButton());
-      expect(stub).toHaveBeenCalledTimes(2);
-      expect(stub).toHaveBeenCalledWith(undefined);
+      expect(stub).toHaveBeenCalledTimes(3);
+      expect(stub.calls.argsFor(2)).toEqual([undefined]);
     }));
   });
 
