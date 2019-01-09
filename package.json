@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "docs": "cd docs && typedoc ../projects/s-ng-utils/src",
-    "prettier-all": "prettier --write \"**/*.{ts,js,json,md,scss,yml}\"",
+    "prettier-all": "prettier --write \"**/*.{html,js,json,md,scss,ts,yml}\"",
     "release": "yarn docs && git add docs/* && standard-version --commit-all && yarn build s-ng-utils --prod"
   },
   "private": true,
