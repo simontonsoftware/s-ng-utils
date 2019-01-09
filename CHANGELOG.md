@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.3.1"></a>
+
+## [0.3.1](https://github.com/simontonsoftware/s-ng-utils/compare/v0.3.0...v0.3.1) (2019-01-09)
+
+### Bug Fixes
+
+- allow `DirectiveSuperclass.getInput$()` to be used in templates ([8e67212](https://github.com/simontonsoftware/s-ng-utils/commit/8e67212))
+- expose `DirectiveSuperclass` in the public api ([b00f390](https://github.com/simontonsoftware/s-ng-utils/commit/b00f390))
+
 <a name="0.3.0"></a>
 
 # [0.3.0](https://github.com/simontonsoftware/s-ng-utils/compare/v0.2.0...v0.3.0) (2018-12-15)

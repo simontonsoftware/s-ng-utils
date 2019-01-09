@@ -889,14 +889,14 @@ img { max-width: 100%; }
 				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 					<a href="formcontrolsuperclass.html#changedetectorref" class="tsd-kind-icon">change<wbr>Detector<wbr>Ref</a>
 				</li>
-				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-					<a href="formcontrolsuperclass.html#changedkeys_" class="tsd-kind-icon">changed<wbr>Keys$</a>
-				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-class">
 					<a href="formcontrolsuperclass.html#emitoutgoingvalue" class="tsd-kind-icon">emit<wbr>Outgoing<wbr>Value</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-class">
 					<a href="formcontrolsuperclass.html#isdisabled" class="tsd-kind-icon">is<wbr>Disabled</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a href="formcontrolsuperclass.html#lastchangedkeys_" class="tsd-kind-icon">last<wbr>Changed<wbr>Keys$</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-class">
 					<a href="formcontrolsuperclass.html#ontouched" class="tsd-kind-icon">on<wbr>Touched</a>
@@ -1032,9 +1032,9 @@ img { max-width: 100%; }
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="formcontrolsuperclass.html#changedetectorref" class="tsd-kind-icon">change<wbr>Detector<wbr>Ref</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="formcontrolsuperclass.html#changedkeys_" class="tsd-kind-icon">changed<wbr>Keys$</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class"><a href="formcontrolsuperclass.html#emitoutgoingvalue" class="tsd-kind-icon">emit<wbr>Outgoing<wbr>Value</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class"><a href="formcontrolsuperclass.html#isdisabled" class="tsd-kind-icon">is<wbr>Disabled</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="formcontrolsuperclass.html#lastchangedkeys_" class="tsd-kind-icon">last<wbr>Changed<wbr>Keys$</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class"><a href="formcontrolsuperclass.html#ontouched" class="tsd-kind-icon">on<wbr>Touched</a></li>
 						</ul>
 					</section>
@@ -1070,7 +1070,7 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Inherited from <a href="directivesuperclass.html">DirectiveSuperclass</a>.<a href="directivesuperclass.html#constructor">constructor</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/directive-superclass.ts#L53">lib/directive-superclass.ts:53</a></li>
+								<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/directive-superclass.ts#L55">lib/directive-superclass.ts:55</a></li>
 							</ul>
 						</aside>
 					</li>
@@ -1086,25 +1086,9 @@ img { max-width: 100%; }
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="directivesuperclass.html">DirectiveSuperclass</a>.<a href="directivesuperclass.html#changedetectorref">changeDetectorRef</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/directive-superclass.ts#L53">lib/directive-superclass.ts:53</a></li>
+						<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/directive-superclass.ts#L55">lib/directive-superclass.ts:55</a></li>
 					</ul>
 				</aside>
-			</section>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-				<a name="changedkeys_" class="tsd-anchor"></a>
-				<h3>changed<wbr>Keys$</h3>
-				<div class="tsd-signature tsd-kind-icon">changed<wbr>Keys$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">keyof this</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;new Subject&lt;Set&lt;keyof this&gt;&gt;()</span></div>
-				<aside class="tsd-sources">
-					<p>Inherited from <a href="directivesuperclass.html">DirectiveSuperclass</a>.<a href="directivesuperclass.html#changedkeys_">changedKeys$</a></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/directive-superclass.ts#L51">lib/directive-superclass.ts:51</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Emits the set of <code>@Input()</code> property names that change during each call to <code>ngOnChanges()</code>.</p>
-					</div>
-				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 				<a name="emitoutgoingvalue" class="tsd-anchor"></a>
@@ -1133,6 +1117,22 @@ img { max-width: 100%; }
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
 						<p>You can bind to this in your template as needed.</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+				<a name="lastchangedkeys_" class="tsd-anchor"></a>
+				<h3>last<wbr>Changed<wbr>Keys$</h3>
+				<div class="tsd-signature tsd-kind-icon">last<wbr>Changed<wbr>Keys$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">BehaviorSubject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">keyof this</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;new BehaviorSubject&lt;Set&lt;keyof this&gt;&gt;(new Set())</span></div>
+				<aside class="tsd-sources">
+					<p>Inherited from <a href="directivesuperclass.html">DirectiveSuperclass</a>.<a href="directivesuperclass.html#lastchangedkeys_">lastChangedKeys$</a></p>
+					<ul>
+						<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/directive-superclass.ts#L53">lib/directive-superclass.ts:53</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Emits the set of <code>@Input()</code> property names that change during each call to <code>ngOnChanges()</code>.</p>
 					</div>
 				</div>
 			</section>
@@ -1165,7 +1165,7 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Inherited from <a href="directivesuperclass.html">DirectiveSuperclass</a>.<a href="directivesuperclass.html#bindtoinstance">bindToInstance</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/directive-superclass.ts#L76">lib/directive-superclass.ts:76</a></li>
+								<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/directive-superclass.ts#L78">lib/directive-superclass.ts:78</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1187,7 +1187,7 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Inherited from <a href="directivesuperclass.html">DirectiveSuperclass</a>.<a href="directivesuperclass.html#getinput_">getInput$</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/directive-superclass.ts#L67">lib/directive-superclass.ts:67</a></li>
+								<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/directive-superclass.ts#L69">lib/directive-superclass.ts:69</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1227,7 +1227,7 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Inherited from <a href="directivesuperclass.html">DirectiveSuperclass</a>.<a href="directivesuperclass.html#ngonchanges">ngOnChanges</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/directive-superclass.ts#L60">lib/directive-superclass.ts:60</a></li>
+								<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/directive-superclass.ts#L62">lib/directive-superclass.ts:62</a></li>
 							</ul>
 						</aside>
 					</li>
