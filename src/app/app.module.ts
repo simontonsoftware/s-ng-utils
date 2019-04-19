@@ -1,11 +1,17 @@
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-
 import { AppComponent } from "./app.component";
+import { LocationComponent } from "./location.component";
+import { ErrorDisplayingInputComponent } from "./error-displaying-input.component";
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule],
+  declarations: [
+    AppComponent,
+    LocationComponent,
+    ErrorDisplayingInputComponent,
+  ],
+  imports: [BrowserModule, FormsModule, ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
