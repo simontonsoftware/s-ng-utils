@@ -21,14 +21,17 @@ export class AppComponent {
   requiredFormControl = new FormControl("initial", Validators.required);
 
   constructor(injector: Injector) {
+    let createdThing: any;
     // use each function once just to show in can be imported
-    new (class extends AutoDestroyable {})();
-    new (class extends DirectiveSuperclass {})(injector);
+    createdThing = new (class extends AutoDestroyable {})();
+    createdThing = new (class extends DirectiveSuperclass {})(injector);
     provideValueAccessor(AppComponent);
-    new (class extends FormControlSuperclass<string> {
+    createdThing = new (class extends FormControlSuperclass<string> {
       handleIncomingValue(value: string) {}
     })(injector);
-    new (class extends WrappedFormControlSuperclass<string> {})(injector);
+    createdThing = new (class extends WrappedFormControlSuperclass<string> {})(
+      injector,
+    );
 
     this.title = "s-ng-utils-platform";
   }

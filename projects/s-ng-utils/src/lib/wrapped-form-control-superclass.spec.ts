@@ -17,6 +17,66 @@ import {
 } from "./form-control-superclass";
 import { WrappedFormControlSuperclass } from "./wrapped-form-control-superclass";
 
+@Component({
+  template: `
+    <s-string-component
+      [(ngModel)]="string"
+      (ngModelChange)="emissions = emissions + 1"
+      #stringControl="ngModel"
+      [disabled]="shouldDisable"
+    ></s-string-component>
+    <div *ngIf="stringControl.touched">Touched!</div>
+    <button (click)="shouldDisable = !shouldDisable">Toggle Disabled</button>
+    <hr />
+    <s-date-component [(ngModel)]="date"></s-date-component>
+  `,
+})
+class TestComponent {
+  emissions = 0;
+  string = "";
+  date = new Date();
+  shouldDisable = false;
+}
+
+@Component({
+  selector: `s-string-component`,
+  template: `
+    <input [formControl]="formControl" />
+  `,
+  providers: [provideValueAccessor(StringComponent)],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class StringComponent extends WrappedFormControlSuperclass<string> {
+  constructor(injector: Injector) {
+    super(injector);
+  }
+}
+
+@Component({
+  selector: `s-date-component`,
+  template: `
+    <input type="datetime-local" [formControl]="formControl" />
+  `,
+  providers: [provideValueAccessor(DateComponent)],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class DateComponent extends WrappedFormControlSuperclass<Date, string> {
+  constructor(injector: Injector) {
+    super(injector);
+  }
+
+  protected innerToOuter(value: string): Date {
+    return new Date(value + "Z");
+  }
+
+  protected outerToInner(value: Date): string {
+    if (value === null) {
+      return ""; // happens during initialization
+    }
+    return value.toISOString().substr(0, 16);
+  }
+}
+
 describe("WrappedFormControlSuperclass", () => {
   let fixture: ComponentFixture<TestComponent>;
   let el: HTMLElement;
@@ -103,70 +163,10 @@ describe("WrappedFormControlSuperclass", () => {
 
   it("has the right class hierarchy", fakeAsync(() => {
     init();
-    const string = fixture.debugElement.query(By.directive(StringComponent))
+    const component = fixture.debugElement.query(By.directive(StringComponent))
       .componentInstance;
-    expect(string instanceof AutoDestroyable).toBe(true);
-    expect(string instanceof DirectiveSuperclass).toBe(true);
-    expect(string instanceof FormControlSuperclass).toBe(true);
+    expect(component instanceof AutoDestroyable).toBe(true);
+    expect(component instanceof DirectiveSuperclass).toBe(true);
+    expect(component instanceof FormControlSuperclass).toBe(true);
   }));
 });
-
-@Component({
-  template: `
-    <s-string-component
-      [(ngModel)]="string"
-      (ngModelChange)="emissions = emissions + 1"
-      #stringControl="ngModel"
-      [disabled]="shouldDisable"
-    ></s-string-component>
-    <div *ngIf="stringControl.touched">Touched!</div>
-    <button (click)="shouldDisable = !shouldDisable">Toggle Disabled</button>
-    <hr />
-    <s-date-component [(ngModel)]="date"></s-date-component>
-  `,
-})
-class TestComponent {
-  emissions = 0;
-  string = "";
-  date = new Date();
-  shouldDisable = false;
-}
-
-@Component({
-  selector: `s-string-component`,
-  template: `
-    <input [formControl]="formControl" />
-  `,
-  providers: [provideValueAccessor(StringComponent)],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-})
-class StringComponent extends WrappedFormControlSuperclass<string> {
-  constructor(injector: Injector) {
-    super(injector);
-  }
-}
-
-@Component({
-  selector: `s-date-component`,
-  template: `
-    <input type="datetime-local" [formControl]="formControl" />
-  `,
-  providers: [provideValueAccessor(DateComponent)],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-})
-class DateComponent extends WrappedFormControlSuperclass<Date, string> {
-  constructor(injector: Injector) {
-    super(injector);
-  }
-
-  protected innerToOuter(value: string): Date {
-    return new Date(value + "Z");
-  }
-
-  protected outerToInner(value: Date): string {
-    if (value === null) {
-      return ""; // happens during initialization
-    }
-    return value.toISOString().substr(0, 16);
-  }
-}

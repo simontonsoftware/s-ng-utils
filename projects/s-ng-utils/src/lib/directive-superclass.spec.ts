@@ -18,6 +18,60 @@ import { map } from "rxjs/operators";
 import { click, find, findButton } from "../test-helpers";
 import { DirectiveSuperclass } from "./directive-superclass";
 
+@Component({
+  template: `
+    <button (click)="toggle('prefix', 'Dark')">Dark</button>
+    <button (click)="toggle('prefix2', 'Slate')">Slate</button>
+    <button (click)="toggle('prefix', 'Dark'); toggle('prefix2', 'Slate')">
+      Both
+    </button>
+    <button (click)="hide = !hide">Hide</button>
+    <s-color-text
+      *ngIf="!hide"
+      [prefix]="prefix"
+      [prefix2]="prefix2"
+    ></s-color-text>
+  `,
+})
+class TestComponent {
+  color$ = new BehaviorSubject<string>("Green");
+  prefix?: string;
+  prefix2?: string;
+  hide = false;
+
+  toggle(key: "prefix" | "prefix2", value: string) {
+    this[key] = this[key] ? undefined : value;
+  }
+}
+
+@Component({
+  selector: "s-color-text",
+  template: `
+    <span [style.background]="color">{{ color }}</span>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class ColorTextComponent extends DirectiveSuperclass {
+  @Input() prefix?: string;
+  @Input() prefix2?: string;
+  color!: string;
+
+  constructor(
+    @Inject("color$") color$: Observable<string>,
+    injector: Injector,
+  ) {
+    super(injector);
+    this.bindToInstance(
+      "color",
+      combineLatest(
+        this.getInput$("prefix"),
+        this.getInput$("prefix2"),
+        color$,
+      ).pipe(map((parts) => parts.filter((p) => p).join(""))),
+    );
+  }
+}
+
 describe("DirectiveSuperclass", () => {
   let fixture: ComponentFixture<TestComponent>;
   let el: HTMLElement;
@@ -151,57 +205,3 @@ describe("DirectiveSuperclass", () => {
     }));
   });
 });
-
-@Component({
-  template: `
-    <button (click)="toggle('prefix', 'Dark')">Dark</button>
-    <button (click)="toggle('prefix2', 'Slate')">Slate</button>
-    <button (click)="toggle('prefix', 'Dark'); toggle('prefix2', 'Slate')">
-      Both
-    </button>
-    <button (click)="hide = !hide">Hide</button>
-    <s-color-text
-      *ngIf="!hide"
-      [prefix]="prefix"
-      [prefix2]="prefix2"
-    ></s-color-text>
-  `,
-})
-class TestComponent {
-  color$ = new BehaviorSubject<string>("Green");
-  prefix?: string;
-  prefix2?: string;
-  hide = false;
-
-  toggle(key: "prefix" | "prefix2", value: string) {
-    this[key] = this[key] ? undefined : value;
-  }
-}
-
-@Component({
-  selector: "s-color-text",
-  template: `
-    <span [style.background]="color">{{ color }}</span>
-  `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-})
-class ColorTextComponent extends DirectiveSuperclass {
-  @Input() prefix?: string;
-  @Input() prefix2?: string;
-  color!: string;
-
-  constructor(
-    @Inject("color$") color$: Observable<string>,
-    injector: Injector,
-  ) {
-    super(injector);
-    this.bindToInstance(
-      "color",
-      combineLatest(
-        this.getInput$("prefix"),
-        this.getInput$("prefix2"),
-        color$,
-      ).pipe(map((parts) => parts.filter((p) => p).join(""))),
-    );
-  }
-}
