@@ -16,7 +16,7 @@ module.exports = function(config) {
       clearContext: false, // leave Jasmine Spec Runner output visible in browser
     },
     coverageIstanbulReporter: {
-      dir: require("path").join(__dirname, "../../coverage"),
+      dir: require("path").join(__dirname, "../../coverage/s-ng-utils"),
       reports: ["html", "lcovonly"],
       fixWebpackSourcePaths: true,
     },
@@ -27,6 +27,7 @@ module.exports = function(config) {
     autoWatch: true,
     browsers: ["Chrome"],
     singleRun: false,
+    restartOnFileChange: true,
     customLaunchers: {
       ChromeHeadlessCI: {
         base: "ChromeHeadless",
