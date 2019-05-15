@@ -65,7 +65,7 @@ export abstract class FormControlSuperclass<T> extends DirectiveSuperclass
   /** Implement this to handle a new value coming in from outside. */
   abstract handleIncomingValue(value: T): void;
 
-  /** Called as angular propagates values changes to this `ControlValueAccessor`. You normally do not need to use it. */
+  /** Called as angular propagates value changes to this `ControlValueAccessor`. You normally do not need to use it. */
   writeValue(value: T) {
     this.handleIncomingValue(value);
     this.changeDetectorRef.markForCheck();

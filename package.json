@@ -10,7 +10,7 @@
     "e2e": "ng e2e",
     "docs": "cd docs && typedoc ../projects/s-ng-utils/src",
     "prettier-all": "prettier --write \"**/*.{html,js,json,md,scss,ts,yml}\"",
-    "release": "yarn docs && git add docs/* && standard-version --commit-all && yarn build s-ng-utils --prod"
+    "release": "yarn docs && git add docs/* && standard-version --commit-all && yarn build s-ng-utils"
   },
   "private": true,
   "dependencies": {

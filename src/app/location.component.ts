@@ -13,12 +13,12 @@ interface Location {
   template: `
     City:
     <input
-      [ngModel]="location.city"
+      [ngModel]="location?.city"
       (ngModelChange)="modifyLocation('city', $event)"
     />
     Country:
     <input
-      [ngModel]="location.country"
+      [ngModel]="location?.country"
       (ngModelChange)="modifyLocation('country', $event)"
     />
   `,
