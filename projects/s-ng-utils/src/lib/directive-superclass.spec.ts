@@ -74,7 +74,6 @@ class ColorTextComponent extends DirectiveSuperclass {
 
 describe("DirectiveSuperclass", () => {
   let fixture: ComponentFixture<TestComponent>;
-  let el: HTMLElement;
   let color$: BehaviorSubject<string>;
   let colorTextComponent: ColorTextComponent;
 
@@ -91,7 +90,6 @@ describe("DirectiveSuperclass", () => {
     Object.assign(fixture.componentInstance, initialAttrs);
     fixture.detectChanges();
     flushMicrotasks();
-    el = fixture.nativeElement;
     colorTextComponent = fixture.debugElement.query(
       By.directive(ColorTextComponent),
     ).componentInstance;

@@ -1,4 +1,7 @@
 {
+  //
+  // from the Angular CLI
+  //
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
@@ -17,6 +20,14 @@
       "s-ng-utils": ["dist/s-ng-utils"],
       "s-ng-utils/*": ["dist/s-ng-utils/*"]
     },
+
+    //
+    // Simonton Software additions
+    //
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "strict": true
-  }
+  },
 }

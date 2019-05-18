@@ -79,7 +79,6 @@ class DateComponent extends WrappedFormControlSuperclass<Date, string> {
 
 describe("WrappedFormControlSuperclass", () => {
   let fixture: ComponentFixture<TestComponent>;
-  let el: HTMLElement;
 
   function init(initialAttrs?: Partial<TestComponent>) {
     TestBed.configureTestingModule({
@@ -91,7 +90,6 @@ describe("WrappedFormControlSuperclass", () => {
     Object.assign(fixture.componentInstance, initialAttrs);
     fixture.detectChanges();
     flushMicrotasks();
-    el = fixture.nativeElement;
   }
 
   function stringInput() {

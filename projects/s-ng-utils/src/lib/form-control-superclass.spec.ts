@@ -59,7 +59,6 @@ class CounterComponent extends FormControlSuperclass<number> {
 
 describe("FormControlSuperclass", () => {
   let fixture: ComponentFixture<TestComponent>;
-  let el: HTMLElement;
 
   function init(initialAttrs?: Partial<TestComponent>) {
     TestBed.configureTestingModule({
@@ -71,7 +70,6 @@ describe("FormControlSuperclass", () => {
     Object.assign(fixture.componentInstance, initialAttrs);
     fixture.detectChanges();
     flushMicrotasks();
-    el = fixture.nativeElement;
   }
 
   function incrementButton() {
