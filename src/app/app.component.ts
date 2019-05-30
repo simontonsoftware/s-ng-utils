@@ -22,13 +22,14 @@ export class AppComponent {
 
   constructor(injector: Injector) {
     // use each function once just to show in can be imported
-    new class extends AutoDestroyable {}();
-    new class extends DirectiveSuperclass {}(injector);
+    // tslint:disable:no-unused-expression
+    new (class extends AutoDestroyable {})();
+    new (class extends DirectiveSuperclass {})(injector);
     provideValueAccessor(AppComponent);
-    new class extends FormControlSuperclass<string> {
-      handleIncomingValue(value: string) {}
-    }(injector);
-    new class extends WrappedFormControlSuperclass<string> {}(injector);
+    new (class extends FormControlSuperclass<string> {
+      handleIncomingValue() {}
+    })(injector);
+    new (class extends WrappedFormControlSuperclass<string> {})(injector);
 
     this.title = "s-ng-utils-platform";
   }

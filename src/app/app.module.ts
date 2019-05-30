@@ -8,8 +8,8 @@ import { ErrorDisplayingInputComponent } from "./error-displaying-input.componen
 @NgModule({
   declarations: [
     AppComponent,
-    LocationComponent,
     ErrorDisplayingInputComponent,
+    LocationComponent,
   ],
   imports: [BrowserModule, FormsModule, ReactiveFormsModule],
   providers: [],

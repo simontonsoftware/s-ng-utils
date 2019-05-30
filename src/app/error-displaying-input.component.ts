@@ -1,6 +1,6 @@
 import { Component, Injector, Self } from "@angular/core";
 import { NgControl } from "@angular/forms";
-import { WrappedFormControlSuperclass, provideValueAccessor } from "s-ng-utils";
+import { WrappedFormControlSuperclass } from "s-ng-utils";
 
 // used to answer https://github.com/simontonsoftware/s-ng-utils/issues/4#issuecomment-484048187
 

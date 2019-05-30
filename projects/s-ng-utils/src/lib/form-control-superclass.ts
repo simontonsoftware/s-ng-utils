@@ -1,6 +1,7 @@
 import { Type } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
-import { Function0, Function1, noop } from "micro-dash";
+import { noop } from "micro-dash";
+import { Function0, Function1 } from "s-ng-dev-utils";
 import { DirectiveSuperclass } from "./directive-superclass";
 
 /**
@@ -65,7 +66,7 @@ export abstract class FormControlSuperclass<T> extends DirectiveSuperclass
   /** Implement this to handle a new value coming in from outside. */
   abstract handleIncomingValue(value: T): void;
 
-  /** Called as angular propagates values changes to this `ControlValueAccessor`. You normally do not need to use it. */
+  /** Called as angular propagates value changes to this `ControlValueAccessor`. You normally do not need to use it. */
   writeValue(value: T) {
     this.handleIncomingValue(value);
     this.changeDetectorRef.markForCheck();

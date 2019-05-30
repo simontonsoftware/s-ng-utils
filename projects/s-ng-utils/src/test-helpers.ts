@@ -1,6 +1,6 @@
 import { ComponentFixture, flushMicrotasks } from "@angular/core/testing";
 
-/** @private */
+/** @hidden */
 export function findButton(
   fixture: ComponentFixture<any>,
   text: string,
@@ -17,7 +17,7 @@ export function findButton(
   }
 }
 
-/** @private */
+/** @hidden */
 export function find<T extends Element>(
   fixture: ComponentFixture<any>,
   cssSelector: string,
@@ -30,13 +30,13 @@ export function find<T extends Element>(
   }
 }
 
-/** @private */
+/** @hidden */
 export function click(element: Element) {
   element.dispatchEvent(new MouseEvent("click", { bubbles: true }));
   flushMicrotasks();
 }
 
-/** @private */
+/** @hidden */
 export function setValue(input: HTMLInputElement, value: string) {
   input.value = value;
   input.dispatchEvent(new Event("input", { bubbles: true }));

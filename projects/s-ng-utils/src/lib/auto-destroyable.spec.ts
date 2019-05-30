@@ -3,26 +3,6 @@ import { ComponentFixtureAutoDetect, TestBed } from "@angular/core/testing";
 import { Subject } from "rxjs";
 import { AutoDestroyable } from "./auto-destroyable";
 
-describe("AutoDestroyable", () => {
-  it("cleans up subscriptions when destroyed by angular", () => {
-    const subject = new Subject();
-    TestBed.configureTestingModule({
-      declarations: [DestroyableDirective, TestComponent],
-      providers: [
-        { provide: Subject, useValue: subject },
-        { provide: ComponentFixtureAutoDetect, useValue: true },
-      ],
-    });
-
-    const fixture = TestBed.createComponent(TestComponent);
-    expect(subject.observers.length).toBe(2);
-
-    fixture.componentInstance.showThings = false;
-    fixture.detectChanges();
-    expect(subject.observers.length).toBe(0);
-  });
-});
-
 @Injectable()
 class DestroyableService extends AutoDestroyable {}
 
@@ -46,3 +26,23 @@ class DestroyableDirective extends AutoDestroyable {
 class TestComponent {
   showThings = true;
 }
+
+describe("AutoDestroyable", () => {
+  it("cleans up subscriptions when destroyed by angular", () => {
+    const subject = new Subject();
+    TestBed.configureTestingModule({
+      declarations: [DestroyableDirective, TestComponent],
+      providers: [
+        { provide: Subject, useValue: subject },
+        { provide: ComponentFixtureAutoDetect, useValue: true },
+      ],
+    });
+
+    const fixture = TestBed.createComponent(TestComponent);
+    expect(subject.observers.length).toBe(2);
+
+    fixture.componentInstance.showThings = false;
+    fixture.detectChanges();
+    expect(subject.observers.length).toBe(0);
+  });
+});

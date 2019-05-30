@@ -1,11 +1,10 @@
 import {
+  ChangeDetectorRef,
+  Injector,
   OnChanges,
   SimpleChanges,
-  Injector,
-  ChangeDetectorRef,
 } from "@angular/core";
-import { keys } from "micro-dash/lib/object/keys";
-import { BehaviorSubject, Observable, Subject } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 import { filter, map } from "rxjs/operators";
 import { AutoDestroyable } from "./auto-destroyable";
 
@@ -65,7 +64,9 @@ export abstract class DirectiveSuperclass extends AutoDestroyable
     );
   }
 
-  /** @return an observable of the values for one of this directive's `@Input()` properties */
+  /**
+   * @return an observable of the values for one of this directive's `@Input()` properties
+   */
   getInput$<K extends keyof this>(key: K): Observable<this[K]> {
     return this.lastChangedKeys$.pipe(
       filter((keys) => keys.has(key)),
@@ -74,7 +75,8 @@ export abstract class DirectiveSuperclass extends AutoDestroyable
   }
 
   /**
-   *  Binds an observable to one of this directive's instance variables. When the observable emits the instance variable will be updated, and change detection will be triggered to propagate any changes. Use this an an alternative to repeating `| async` multiple times in your template. */
+   * Binds an observable to one of this directive's instance variables. When the observable emits the instance variable will be updated, and change detection will be triggered to propagate any changes. Use this an an alternative to repeating `| async` multiple times in your template.
+   */
   bindToInstance<K extends keyof this>(key: K, value$: Observable<this[K]>) {
     this.subscribeTo(value$, (value) => {
       this[key] = value;
