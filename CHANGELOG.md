@@ -1,6 +1,20 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [0.4.0](https://github.com/simontonsoftware/s-ng-utils/compare/v0.3.1...v0.4.0) (2019-05-30)
+
+### Features
+
+- Upgrade dependencies ([b0de2a1](https://github.com/simontonsoftware/s-ng-utils/commit/b0de2a1))
+
+### BREAKING CHANGES
+
+- Uses Typescript 3.4 (up from 3.1)
+- Requires Rxjs 6.4 (up from 6.3)
+- Requires Angular 8 (up from 7)
+- Requires micro-dash 6 (up from 5)
+- Requires s-rxjs-utils 2 (up from 1)
 
 <a name="0.3.1"></a>
 
