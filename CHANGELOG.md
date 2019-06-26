@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.1](https://github.com/simontonsoftware/s-ng-utils/compare/v0.4.0...v0.4.1) (2019-06-26)
+
+### Bug Fixes
+
+- remove accidental dependency on `s-ng-dev-utils` ([6da82c3](https://github.com/simontonsoftware/s-ng-utils/commit/6da82c3))
+
 ## [0.4.0](https://github.com/simontonsoftware/s-ng-utils/compare/v0.3.1...v0.4.0) (2019-05-30)
 
 ### Features
