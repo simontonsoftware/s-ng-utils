@@ -1,4 +1,5 @@
 import { OnDestroy } from "@angular/core";
+import { Observable, Subject } from "rxjs";
 import { SubscriptionManager } from "s-rxjs-utils";
 
 /**
@@ -24,7 +25,21 @@ import { SubscriptionManager } from "s-rxjs-utils";
  */
 export abstract class AutoDestroyable extends SubscriptionManager
   implements OnDestroy {
+  /**
+   * An observable that emits once when this object is destroyed, then completes.
+   */
+  destruction$: Observable<undefined>;
+
+  private destructionSubject = new Subject<undefined>();
+
+  constructor() {
+    super();
+    this.destruction$ = this.destructionSubject.asObservable();
+  }
+
   ngOnDestroy() {
     this.unsubscribe();
+    this.destructionSubject.next();
+    this.destructionSubject.complete();
   }
 }
