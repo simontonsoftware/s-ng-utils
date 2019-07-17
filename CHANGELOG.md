@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0](https://github.com/simontonsoftware/s-ng-utils/compare/v0.4.1...v1.0.0) (2019-07-17)
+
+### Features
+
+- add `AutoDestroyable.destroy$` ([d6e798f](https://github.com/simontonsoftware/s-ng-utils/commit/d6e798f))
+
 ### [0.4.1](https://github.com/simontonsoftware/s-ng-utils/compare/v0.4.0...v0.4.1) (2019-06-26)
 
 ### Bug Fixes

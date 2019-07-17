@@ -875,13 +875,13 @@ img { max-width: 100%; }
 <nav class="tsd-navigation secondary">
 	<ul>
 		<li class=" tsd-kind-class">
-			<a href="autodestroyable.html" class="tsd-kind-icon">Auto<wbr>Destroyable</a>
-		</li>
-		<li class=" tsd-kind-class">
 			<a href="directivesuperclass.html" class="tsd-kind-icon">Directive<wbr>Superclass</a>
 		</li>
 		<li class=" tsd-kind-class tsd-has-type-parameter">
 			<a href="formcontrolsuperclass.html" class="tsd-kind-icon">Form<wbr>Control<wbr>Superclass</a>
+		</li>
+		<li class=" tsd-kind-class">
+			<a href="injectablesuperclass.html" class="tsd-kind-icon">Injectable<wbr>Superclass</a>
 		</li>
 		<li class="current tsd-kind-class tsd-has-type-parameter">
 			<a href="wrappedformcontrolsuperclass.html" class="tsd-kind-icon">Wrapped<wbr>Form<wbr>Control<wbr>Superclass</a>
@@ -891,6 +891,9 @@ img { max-width: 100%; }
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 					<a href="wrappedformcontrolsuperclass.html#changedetectorref" class="tsd-kind-icon">change<wbr>Detector<wbr>Ref</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a href="wrappedformcontrolsuperclass.html#destruction_" class="tsd-kind-icon">destruction$</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a href="wrappedformcontrolsuperclass.html#emitoutgoingvalue" class="tsd-kind-icon">emit<wbr>Outgoing<wbr>Value</a>
@@ -1048,6 +1051,7 @@ img { max-width: 100%; }
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="wrappedformcontrolsuperclass.html#changedetectorref" class="tsd-kind-icon">change<wbr>Detector<wbr>Ref</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="wrappedformcontrolsuperclass.html#destruction_" class="tsd-kind-icon">destruction$</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="wrappedformcontrolsuperclass.html#emitoutgoingvalue" class="tsd-kind-icon">emit<wbr>Outgoing<wbr>Value</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class"><a href="wrappedformcontrolsuperclass.html#formcontrol" class="tsd-kind-icon">form<wbr>Control</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="wrappedformcontrolsuperclass.html#isdisabled" class="tsd-kind-icon">is<wbr>Disabled</a></li>
@@ -1105,9 +1109,25 @@ img { max-width: 100%; }
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="directivesuperclass.html">DirectiveSuperclass</a>.<a href="directivesuperclass.html#changedetectorref">changeDetectorRef</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/directive-superclass.ts#L54">lib/directive-superclass.ts:54</a></li>
+						<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/directive-superclass.ts#L55">lib/directive-superclass.ts:55</a></li>
 					</ul>
 				</aside>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+				<a name="destruction_" class="tsd-anchor"></a>
+				<h3>destruction$</h3>
+				<div class="tsd-signature tsd-kind-icon">destruction$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></div>
+				<aside class="tsd-sources">
+					<p>Inherited from <a href="injectablesuperclass.html">InjectableSuperclass</a>.<a href="injectablesuperclass.html#destruction_">destruction$</a></p>
+					<ul>
+						<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/injectable-superclass.ts#L31">lib/injectable-superclass.ts:31</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>An observable that emits once when this object is destroyed, then completes.</p>
+					</div>
+				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 				<a name="emitoutgoingvalue" class="tsd-anchor"></a>
@@ -1163,12 +1183,12 @@ img { max-width: 100%; }
 				<aside class="tsd-sources">
 					<p>Inherited from <a href="directivesuperclass.html">DirectiveSuperclass</a>.<a href="directivesuperclass.html#lastchangedkeys_">lastChangedKeys$</a></p>
 					<ul>
-						<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/directive-superclass.ts#L52">lib/directive-superclass.ts:52</a></li>
+						<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/directive-superclass.ts#L53">lib/directive-superclass.ts:53</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Emits the set of <code>@Input()</code> property names that change during each call to <code>ngOnChanges()</code>.</p>
+						<p> Emits the set of <code>@Input()</code> property names that change during each call to <code>ngOnChanges()</code>.</p>
 					</div>
 				</div>
 			</section>
@@ -1202,7 +1222,7 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Inherited from <a href="directivesuperclass.html">DirectiveSuperclass</a>.<a href="directivesuperclass.html#bindtoinstance">bindToInstance</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/directive-superclass.ts#L80">lib/directive-superclass.ts:80</a></li>
+								<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/directive-superclass.ts#L81">lib/directive-superclass.ts:81</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1224,7 +1244,7 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Inherited from <a href="directivesuperclass.html">DirectiveSuperclass</a>.<a href="directivesuperclass.html#getinput_">getInput$</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/directive-superclass.ts#L70">lib/directive-superclass.ts:70</a></li>
+								<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/directive-superclass.ts#L71">lib/directive-superclass.ts:71</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1286,7 +1306,7 @@ img { max-width: 100%; }
 						<aside class="tsd-sources">
 							<p>Inherited from <a href="directivesuperclass.html">DirectiveSuperclass</a>.<a href="directivesuperclass.html#ngonchanges">ngOnChanges</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/directive-superclass.ts#L61">lib/directive-superclass.ts:61</a></li>
+								<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/directive-superclass.ts#L62">lib/directive-superclass.ts:62</a></li>
 							</ul>
 						</aside>
 					</li>
@@ -1301,9 +1321,9 @@ img { max-width: 100%; }
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
-							<p>Inherited from <a href="autodestroyable.html">AutoDestroyable</a>.<a href="autodestroyable.html#ngondestroy">ngOnDestroy</a></p>
+							<p>Inherited from <a href="injectablesuperclass.html">InjectableSuperclass</a>.<a href="injectablesuperclass.html#ngondestroy">ngOnDestroy</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/auto-destroyable.ts#L27">lib/auto-destroyable.ts:27</a></li>
+								<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/injectable-superclass.ts#L40">lib/injectable-superclass.ts:40</a></li>
 							</ul>
 						</aside>
 					</li>

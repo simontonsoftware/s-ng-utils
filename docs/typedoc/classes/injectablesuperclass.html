@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>AutoDestroyable | s-ng-utils</title>
+	<title>InjectableSuperclass | s-ng-utils</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css">/*! normalize.css v1.1.3 | MIT License | git.io/normalize */
@@ -874,25 +874,31 @@ img { max-width: 100%; }
 </header>
 <nav class="tsd-navigation secondary">
 	<ul>
-		<li class="current tsd-kind-class">
-			<a href="autodestroyable.html" class="tsd-kind-icon">Auto<wbr>Destroyable</a>
-			<ul>
-				<li class=" tsd-kind-method tsd-parent-kind-class">
-					<a href="autodestroyable.html#ngondestroy" class="tsd-kind-icon">ng<wbr>OnDestroy</a>
-				</li>
-				<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited">
-					<a href="autodestroyable.html#subscribeto" class="tsd-kind-icon">subscribe<wbr>To</a>
-				</li>
-				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-					<a href="autodestroyable.html#unsubscribe" class="tsd-kind-icon">unsubscribe</a>
-				</li>
-			</ul>
-		</li>
 		<li class=" tsd-kind-class">
 			<a href="directivesuperclass.html" class="tsd-kind-icon">Directive<wbr>Superclass</a>
 		</li>
 		<li class=" tsd-kind-class tsd-has-type-parameter">
 			<a href="formcontrolsuperclass.html" class="tsd-kind-icon">Form<wbr>Control<wbr>Superclass</a>
+		</li>
+		<li class="current tsd-kind-class">
+			<a href="injectablesuperclass.html" class="tsd-kind-icon">Injectable<wbr>Superclass</a>
+			<ul>
+				<li class=" tsd-kind-constructor tsd-parent-kind-class">
+					<a href="injectablesuperclass.html#constructor" class="tsd-kind-icon">constructor</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-class">
+					<a href="injectablesuperclass.html#destruction_" class="tsd-kind-icon">destruction$</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="injectablesuperclass.html#ngondestroy" class="tsd-kind-icon">ng<wbr>OnDestroy</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited">
+					<a href="injectablesuperclass.html#subscribeto" class="tsd-kind-icon">subscribe<wbr>To</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a href="injectablesuperclass.html#unsubscribe" class="tsd-kind-icon">unsubscribe</a>
+				</li>
+			</ul>
 		</li>
 		<li class=" tsd-kind-class tsd-has-type-parameter">
 			<a href="wrappedformcontrolsuperclass.html" class="tsd-kind-icon">Wrapped<wbr>Form<wbr>Control<wbr>Superclass</a>
@@ -919,7 +925,7 @@ img { max-width: 100%; }
 <span class="hljs-comment">// or @Component() (also consider DirectiveSuperclass)</span>
 <span class="hljs-comment">// or @Directive() (also consider DirectiveSuperclass)</span>
 <span class="hljs-comment">// or @Pipe()</span>
-<span class="hljs-keyword">class</span> MyThing <span class="hljs-keyword">extends</span> AutoDestroyable {
+<span class="hljs-keyword">class</span> MyThing <span class="hljs-keyword">extends</span> InjectableSuperclass {
   <span class="hljs-keyword">constructor</span>(<span class="hljs-params">somethingObservable: Observable</span>) {
     <span class="hljs-keyword">super</span>();
     <span class="hljs-keyword">this</span>.subscribeTo(somethingObservable);
@@ -939,7 +945,7 @@ img { max-width: 100%; }
 					<span class="tsd-signature-type">SubscriptionManager</span>
 					<ul class="tsd-hierarchy">
 						<li>
-							<span class="target">AutoDestroyable</span>
+							<span class="target">InjectableSuperclass</span>
 							<ul class="tsd-hierarchy">
 								<li>
 									<a href="directivesuperclass.html" class="tsd-signature-type">DirectiveSuperclass</a>
@@ -962,13 +968,62 @@ img { max-width: 100%; }
 			<section class="tsd-panel tsd-index-panel">
 				<div class="tsd-index-content">
 					<section class="tsd-index-section ">
-						<h3>Methods</h3>
+						<h3>Constructors</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-method tsd-parent-kind-class"><a href="autodestroyable.html#ngondestroy" class="tsd-kind-icon">ng<wbr>OnDestroy</a></li>
-							<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited"><a href="autodestroyable.html#subscribeto" class="tsd-kind-icon">subscribe<wbr>To</a></li>
-							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="autodestroyable.html#unsubscribe" class="tsd-kind-icon">unsubscribe</a></li>
+							<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="injectablesuperclass.html#constructor" class="tsd-kind-icon">constructor</a></li>
 						</ul>
 					</section>
+					<section class="tsd-index-section ">
+						<h3>Properties</h3>
+						<ul class="tsd-index-list">
+							<li class="tsd-kind-property tsd-parent-kind-class"><a href="injectablesuperclass.html#destruction_" class="tsd-kind-icon">destruction$</a></li>
+						</ul>
+					</section>
+					<section class="tsd-index-section ">
+						<h3>Methods</h3>
+						<ul class="tsd-index-list">
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="injectablesuperclass.html#ngondestroy" class="tsd-kind-icon">ng<wbr>OnDestroy</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited"><a href="injectablesuperclass.html#subscribeto" class="tsd-kind-icon">subscribe<wbr>To</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="injectablesuperclass.html#unsubscribe" class="tsd-kind-icon">unsubscribe</a></li>
+						</ul>
+					</section>
+				</div>
+			</section>
+		</section>
+		<section class="tsd-panel-group tsd-member-group ">
+			<h2>Constructors</h2>
+			<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+				<a name="constructor" class="tsd-anchor"></a>
+				<h3>constructor</h3>
+				<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">new <wbr>Injectable<wbr>Superclass<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="injectablesuperclass.html" class="tsd-signature-type">InjectableSuperclass</a></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/injectable-superclass.ts#L33">lib/injectable-superclass.ts:33</a></li>
+							</ul>
+						</aside>
+					</li>
+				</ul>
+			</section>
+		</section>
+		<section class="tsd-panel-group tsd-member-group ">
+			<h2>Properties</h2>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+				<a name="destruction_" class="tsd-anchor"></a>
+				<h3>destruction$</h3>
+				<div class="tsd-signature tsd-kind-icon">destruction$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/injectable-superclass.ts#L31">lib/injectable-superclass.ts:31</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>An observable that emits once when this object is destroyed, then completes.</p>
+					</div>
 				</div>
 			</section>
 		</section>
@@ -984,7 +1039,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/auto-destroyable.ts#L27">lib/auto-destroyable.ts:27</a></li>
+								<li>Defined in <a href="https://github.com/simontonsoftware/s-ng-utils/blob/master/projects/s-ng-utils/src/lib/injectable-superclass.ts#L40">lib/injectable-superclass.ts:40</a></li>
 							</ul>
 						</aside>
 					</li>
