@@ -9,12 +9,12 @@ import {
 import { FormsModule } from "@angular/forms";
 import { By } from "@angular/platform-browser";
 import { click, find, findButton } from "../test-helpers";
-import { AutoDestroyable } from "./auto-destroyable";
 import { DirectiveSuperclass } from "./directive-superclass";
 import {
   FormControlSuperclass,
   provideValueAccessor,
 } from "./form-control-superclass";
+import { InjectableSuperclass } from "./injectable-superclass";
 
 @Component({
   template: `
@@ -111,7 +111,7 @@ describe("FormControlSuperclass", () => {
     init();
     const counter = fixture.debugElement.query(By.directive(CounterComponent))
       .componentInstance;
-    expect(counter instanceof AutoDestroyable).toBe(true);
+    expect(counter instanceof InjectableSuperclass).toBe(true);
     expect(counter instanceof DirectiveSuperclass).toBe(true);
   }));
 });

@@ -10,7 +10,7 @@ import { SubscriptionManager } from "s-rxjs-utils";
  * // or @Component() (also consider DirectiveSuperclass)
  * // or @Directive() (also consider DirectiveSuperclass)
  * // or @Pipe()
- * class MyThing extends AutoDestroyable {
+ * class MyThing extends InjectableSuperclass {
  *   constructor(somethingObservable: Observable) {
  *     super();
  *     this.subscribeTo(somethingObservable);
@@ -23,7 +23,7 @@ import { SubscriptionManager } from "s-rxjs-utils";
  * }
  * ```
  */
-export abstract class AutoDestroyable extends SubscriptionManager
+export abstract class InjectableSuperclass extends SubscriptionManager
   implements OnDestroy {
   /**
    * An observable that emits once when this object is destroyed, then completes.

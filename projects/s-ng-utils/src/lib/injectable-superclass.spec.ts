@@ -7,16 +7,16 @@ import {
 import { By } from "@angular/platform-browser";
 import { Subject } from "rxjs";
 import { expectSingleCallAndReset } from "s-ng-dev-utils";
-import { AutoDestroyable } from "./auto-destroyable";
+import { InjectableSuperclass } from "./injectable-superclass";
 
 @Injectable()
-class DestroyableService extends AutoDestroyable {}
+class DestroyableService extends InjectableSuperclass {}
 
 @Directive({
   selector: `[sDestroyableDirective]`,
   providers: [DestroyableService],
 })
-class DestroyableDirective extends AutoDestroyable {
+class DestroyableDirective extends InjectableSuperclass {
   constructor(subject: Subject<any>, public service: DestroyableService) {
     super();
     this.subscribeTo(subject);
@@ -33,7 +33,7 @@ class TestComponent {
   showThings = true;
 }
 
-describe("AutoDestroyable", () => {
+describe("InjectableSuperclass", () => {
   let subject: Subject<void>;
   let fixture: ComponentFixture<TestComponent>;
 

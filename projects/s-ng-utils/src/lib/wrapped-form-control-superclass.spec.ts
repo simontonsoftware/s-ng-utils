@@ -9,12 +9,12 @@ import {
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { By } from "@angular/platform-browser";
 import { click, find, findButton, setValue } from "../test-helpers";
-import { AutoDestroyable } from "./auto-destroyable";
 import { DirectiveSuperclass } from "./directive-superclass";
 import {
   FormControlSuperclass,
   provideValueAccessor,
 } from "./form-control-superclass";
+import { InjectableSuperclass } from "./injectable-superclass";
 import { WrappedFormControlSuperclass } from "./wrapped-form-control-superclass";
 
 @Component({
@@ -163,7 +163,7 @@ describe("WrappedFormControlSuperclass", () => {
     init();
     const component = fixture.debugElement.query(By.directive(StringComponent))
       .componentInstance;
-    expect(component instanceof AutoDestroyable).toBe(true);
+    expect(component instanceof InjectableSuperclass).toBe(true);
     expect(component instanceof DirectiveSuperclass).toBe(true);
     expect(component instanceof FormControlSuperclass).toBe(true);
   }));

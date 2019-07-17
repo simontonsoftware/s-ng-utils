@@ -1,9 +1,9 @@
 import { Component, Injector } from "@angular/core";
 import { FormControl, Validators } from "@angular/forms";
 import {
-  AutoDestroyable,
   DirectiveSuperclass,
   FormControlSuperclass,
+  InjectableSuperclass,
   provideValueAccessor,
   WrappedFormControlSuperclass,
 } from "s-ng-utils";
@@ -23,8 +23,8 @@ export class AppComponent {
   constructor(injector: Injector) {
     // use each function once just to show in can be imported
     // tslint:disable:no-unused-expression
-    new (class extends AutoDestroyable {})();
     new (class extends DirectiveSuperclass {})(injector);
+    new (class extends InjectableSuperclass {})();
     provideValueAccessor(AppComponent);
     new (class extends FormControlSuperclass<string> {
       handleIncomingValue() {}

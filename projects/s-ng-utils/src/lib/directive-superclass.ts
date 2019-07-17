@@ -6,7 +6,7 @@ import {
 } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { filter, map } from "rxjs/operators";
-import { AutoDestroyable } from "./auto-destroyable";
+import { InjectableSuperclass } from "./injectable-superclass";
 
 /**
  * Extend this when creating a directive (including a component, which is a kind of directive) to gain access to the helpers demonstrated below. **Warning:** You _must_ include a constructor in your subclass.
@@ -45,10 +45,11 @@ import { AutoDestroyable } from "./auto-destroyable";
  * }
  * ```
  */
-export abstract class DirectiveSuperclass extends AutoDestroyable
+export abstract class DirectiveSuperclass extends InjectableSuperclass
   implements OnChanges {
-  /** Emits the set of `@Input()` property names that change during each call to `ngOnChanges()`. */
-  // lastChangedKeys$ = new Subject<Set<keyof this>>();
+  /**
+   *  Emits the set of `@Input()` property names that change during each call to `ngOnChanges()`.
+   */
   lastChangedKeys$ = new BehaviorSubject<Set<keyof this>>(new Set());
 
   protected changeDetectorRef: ChangeDetectorRef;
