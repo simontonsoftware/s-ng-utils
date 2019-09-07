@@ -23,9 +23,9 @@
     "@angular/platform-browser": "~8.2.4",
     "@angular/platform-browser-dynamic": "~8.2.4",
     "@angular/router": "~8.2.4",
-    "micro-dash": "^6.3.0",
+    "micro-dash": "~6.3.0",
     "rxjs": "~6.4.0",
-    "s-rxjs-utils": "^2.2.2",
+    "s-rxjs-utils": "~2.2.2",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
   },
