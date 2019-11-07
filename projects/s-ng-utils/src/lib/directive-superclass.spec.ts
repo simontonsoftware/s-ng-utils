@@ -15,6 +15,7 @@ import {
 import { By } from "@angular/platform-browser";
 import { BehaviorSubject, combineLatest, Observable } from "rxjs";
 import { map } from "rxjs/operators";
+import { expectSingleCallAndReset } from "s-ng-dev-utils";
 import { click, find, findButton } from "../test-helpers";
 import { DirectiveSuperclass } from "./directive-superclass";
 
@@ -54,6 +55,7 @@ class TestComponent {
 class ColorTextComponent extends DirectiveSuperclass {
   @Input() prefix?: string;
   @Input() prefix2?: string;
+  @Input() unspecified?: string;
   color!: string;
 
   constructor(
@@ -117,25 +119,21 @@ describe("DirectiveSuperclass", () => {
 
   /////////
 
-  describe(".lastChangedKeys$", () => {
+  describe(".inputChanges$", () => {
     it("emits the keys that change", fakeAsync(() => {
       init();
       const stub = jasmine.createSpy();
-      colorTextComponent.lastChangedKeys$.subscribe(stub);
-      expect(stub).toHaveBeenCalledTimes(1);
-      expect(stub.calls.argsFor(0)).toEqual([new Set(["prefix", "prefix2"])]);
+      colorTextComponent.inputChanges$.subscribe(stub);
+      expect(stub).not.toHaveBeenCalled();
 
       click(darkButton());
-      expect(stub).toHaveBeenCalledTimes(2);
-      expect(stub.calls.argsFor(1)).toEqual([new Set(["prefix"])]);
+      expectSingleCallAndReset(stub, new Set(["prefix"]));
 
       click(slateButton());
-      expect(stub).toHaveBeenCalledTimes(3);
-      expect(stub.calls.argsFor(2)).toEqual([new Set(["prefix2"])]);
+      expectSingleCallAndReset(stub, new Set(["prefix2"]));
 
       click(bothButton());
-      expect(stub).toHaveBeenCalledTimes(4);
-      expect(stub.calls.argsFor(3)).toEqual([new Set(["prefix", "prefix2"])]);
+      expectSingleCallAndReset(stub, new Set(["prefix", "prefix2"]));
     }));
   });
 
@@ -157,6 +155,14 @@ describe("DirectiveSuperclass", () => {
       click(bothButton());
       expect(stub).toHaveBeenCalledTimes(3);
       expect(stub.calls.argsFor(2)).toEqual([undefined]);
+    }));
+
+    // https://github.com/simontonsoftware/s-ng-utils/issues/10
+    it("emits `undefined` for unspecified inputs", fakeAsync(() => {
+      init();
+      const stub = jasmine.createSpy();
+      colorTextComponent.getInput$("unspecified").subscribe(stub);
+      expectSingleCallAndReset(stub, undefined);
     }));
   });
 

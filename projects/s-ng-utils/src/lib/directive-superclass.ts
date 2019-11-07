@@ -4,8 +4,8 @@ import {
   OnChanges,
   SimpleChanges,
 } from "@angular/core";
-import { BehaviorSubject, Observable } from "rxjs";
-import { filter, map } from "rxjs/operators";
+import { Observable, Subject } from "rxjs";
+import { filter, map, startWith } from "rxjs/operators";
 import { InjectableSuperclass } from "./injectable-superclass";
 
 /**
@@ -50,7 +50,7 @@ export abstract class DirectiveSuperclass extends InjectableSuperclass
   /**
    *  Emits the set of `@Input()` property names that change during each call to `ngOnChanges()`.
    */
-  lastChangedKeys$ = new BehaviorSubject<Set<keyof this>>(new Set());
+  inputChanges$ = new Subject<Set<keyof this>>();
 
   protected changeDetectorRef: ChangeDetectorRef;
 
@@ -60,7 +60,7 @@ export abstract class DirectiveSuperclass extends InjectableSuperclass
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.lastChangedKeys$.next(
+    this.inputChanges$.next(
       new Set(Object.getOwnPropertyNames(changes) as Array<keyof this>),
     );
   }
@@ -69,8 +69,9 @@ export abstract class DirectiveSuperclass extends InjectableSuperclass
    * @return an observable of the values for one of this directive's `@Input()` properties
    */
   getInput$<K extends keyof this>(key: K): Observable<this[K]> {
-    return this.lastChangedKeys$.pipe(
+    return this.inputChanges$.pipe(
       filter((keys) => keys.has(key)),
+      startWith(undefined),
       map(() => this[key]),
     );
   }
