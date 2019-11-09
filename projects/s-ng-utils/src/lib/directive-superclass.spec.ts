@@ -65,11 +65,11 @@ class ColorTextComponent extends DirectiveSuperclass {
     super(injector);
     this.bindToInstance(
       "color",
-      combineLatest(
+      combineLatest([
         this.getInput$("prefix"),
         this.getInput$("prefix2"),
         color$,
-      ).pipe(map((parts) => parts.filter((p) => p).join(""))),
+      ]).pipe(map((parts) => parts.filter((p) => p).join(""))),
     );
   }
 }

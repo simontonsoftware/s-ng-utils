@@ -149,5 +149,8 @@
       }
     }
   },
-  "defaultProject": "s-ng-utils-platform"
+  "defaultProject": "s-ng-utils-platform",
+  "cli": {
+    "analytics": "4a7df08f-32b4-480f-86f2-edc7e4a48553"
+  }
 }
