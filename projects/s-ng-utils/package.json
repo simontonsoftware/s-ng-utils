@@ -5,10 +5,11 @@
   "repository": "simontonsoftware/s-ng-utils",
   "license": "MIT",
   "peerDependencies": {
-    "@angular/common": ">=8.0.0 <9.0.0",
-    "@angular/core": ">=8.0.0 <9.0.0",
+    "@angular/common": "^9.0.0-rc.1",
+    "@angular/core": "^9.0.0-rc.1",
     "micro-dash": ">=6.3.0 <7.0.0",
     "rxjs": ">=6.4.0 <7.0.0",
-    "s-rxjs-utils": ">=2.2.2 <3.0.0"
+    "s-rxjs-utils": ">=2.2.2 <3.0.0",
+    "tslib": "^1.10.0"
   }
 }
