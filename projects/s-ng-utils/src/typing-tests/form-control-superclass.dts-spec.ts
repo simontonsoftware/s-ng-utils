@@ -1,7 +1,7 @@
 import { FormControlSuperclass } from "../public-api";
 
 class TestSubclass extends FormControlSuperclass<Date> {
-  handleIncomingValue(value: Date): void {}
+  handleIncomingValue(_value: Date): void {}
 }
 
 const obj = new TestSubclass(null as any);
@@ -12,3 +12,5 @@ const emitOutgoingValue = obj.emitOutgoingValue;
 const writeValue = obj.writeValue;
 // $ExpectType (fn: (value: Date) => void) => void
 const registerOnChange = obj.registerOnChange;
+
+console.log(emitOutgoingValue, writeValue, registerOnChange);
