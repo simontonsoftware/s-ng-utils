@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/simontonsoftware/s-ng-utils/compare/v1.0.0...v2.0.0) (2020-02-08)
+
+### ⚠ BREAKING CHANGES
+
+- requires micro-dash 7
+- requires s-rxjs-utils 3
+- requires s-js-utils
+- requires Typescript 3.7
+- requires RxJS 6.5
+- removed `DirectiveSuperclass.lastChangedKeys$` in favor of `.inputChanges$`
+
+### Features
+
+- upgrade to Angular 9 ([d5537e8](https://github.com/simontonsoftware/s-ng-utils/commit/d5537e81cc231b3f7971560166211226b25aa399))
+
+### Bug Fixes
+
+- `DirectiveSuperclass.getInput$()` now always starts with a value ([ae6ffb2](https://github.com/simontonsoftware/s-ng-utils/commit/ae6ffb2c42f2af041091f23d3093645d1358fa04))
+
+* upgrade buildchain ([fce37eb](https://github.com/simontonsoftware/s-ng-utils/commit/fce37ebd8e9bd362f1ac085a8cca2f9509d20a6e))
+* upgrade dependencies ([00b3811](https://github.com/simontonsoftware/s-ng-utils/commit/00b38110ffd829646a4c50c1e5c2dd8e739b9f2f))
+
 ## [1.0.0](https://github.com/simontonsoftware/s-ng-utils/compare/v0.4.1...v1.0.0) (2019-07-17)
 
 ### Features
