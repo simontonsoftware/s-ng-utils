@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/simontonsoftware/s-ng-utils.svg?branch=master)](https://travis-ci.org/simontonsoftware/s-ng-utils) [![Coverage Status](https://coveralls.io/repos/github/simontonsoftware/s-ng-utils/badge.svg?branch=master)](https://coveralls.io/github/simontonsoftware/s-ng-utils?branch=master)
 
-## Simonton Software Typescript Utils
+## Simonton Software Typescript Libraries
 
 `s-ng-utils` is one library in a suite that is available from Simonton Software. Each one builds on the last, organized by their dependencies:
 
@@ -13,3 +13,15 @@
 ## API Documentation
 
 To quickly see what is available, see the [api documentation](https://simontonsoftware.github.io/s-ng-utils/typedoc).
+
+## Installation
+
+Install along with its peer dependencies using:
+
+```shell script
+npm install --save s-ng-utils s-rxjs-utils s-js-utils micro-dash
+
+# OR
+
+yarn add s-ng-utils s-rxjs-utils s-js-utils micro-dash
+```
