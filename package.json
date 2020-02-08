@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "dtslint": "dtslint --expectOnly --localTs node_modules/typescript/lib projects/s-ng-utils/src/typing-tests",
-    "docs": "cd docs && typedoc ../projects/s-ng-utils/src",
+    "docs": "cd docs && typedoc ../projects/s-ng-utils/src/lib",
     "prettier-all": "prettier --write \"**/*.{html,js,json,md,scss,ts,yml}\"",
     "release": "yarn docs && git add docs/* && standard-version --commit-all && yarn build --prod s-ng-utils"
   },
