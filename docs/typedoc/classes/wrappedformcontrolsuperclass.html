@@ -965,33 +965,33 @@ img { max-width: 100%; }
 				</div>
 				<p>Example when you don&#39;t need to modify the wrapped control&#39;s value:</p>
 				<pre><code class="language-ts"><span class="hljs-meta">@Component</span>({
-  template: <span class="hljs-string">`&lt;input [formControl]="formControl"&gt;`</span>,
+  template: <span class="hljs-string">`&lt;input [formControl]=&quot;formControl&quot;&gt;`</span>,
   providers: [provideValueAccessor(StringComponent)],
 })
 <span class="hljs-keyword">class</span> StringComponent <span class="hljs-keyword">extends</span> WrappedFormControlSuperclass&lt;<span class="hljs-built_in">string</span>&gt; {
   <span class="hljs-comment">// This looks unnecessary, but is required for Angular to provide `Injector`</span>
   <span class="hljs-keyword">constructor</span>(<span class="hljs-params">injector: Injector</span>) {
-    <span class="hljs-keyword">super</span>(injector);
+    <span class="hljs-built_in">super</span>(injector);
   }
 }</code></pre>
 				<p>Example when you need to modify the wrapped control&#39;s value:</p>
 				<pre><code class="language-ts"><span class="hljs-meta">@Component</span>({
-  template: <span class="hljs-string">`&lt;input type="datetime-local" [formControl]="formControl"&gt;`</span>,
+  template: <span class="hljs-string">`&lt;input type=&quot;datetime-local&quot; [formControl]=&quot;formControl&quot;&gt;`</span>,
   providers: [provideValueAccessor(DateComponent)],
 })
 <span class="hljs-keyword">class</span> DateComponent <span class="hljs-keyword">extends</span> WrappedFormControlSuperclass&lt;<span class="hljs-built_in">Date</span>, <span class="hljs-built_in">string</span>&gt; {
   <span class="hljs-comment">// This looks unnecessary, but is required for Angular to provide `Injector`</span>
   <span class="hljs-keyword">constructor</span>(<span class="hljs-params">injector: Injector</span>) {
-    <span class="hljs-keyword">super</span>(injector);
+    <span class="hljs-built_in">super</span>(injector);
   }
 
   <span class="hljs-keyword">protected</span> innerToOuter(value: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">Date</span> {
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(value + <span class="hljs-string">"Z"</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(value + <span class="hljs-string">&quot;Z&quot;</span>);
   }
 
   <span class="hljs-keyword">protected</span> outerToInner(value: <span class="hljs-built_in">Date</span>): <span class="hljs-built_in">string</span> {
     <span class="hljs-keyword">if</span> (value === <span class="hljs-literal">null</span>) {
-      <span class="hljs-keyword">return</span> <span class="hljs-string">""</span>; <span class="hljs-comment">// happens during initialization</span>
+      <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>; <span class="hljs-comment">// happens during initialization</span>
     }
     <span class="hljs-keyword">return</span> value.toISOString().substr(<span class="hljs-number">0</span>, <span class="hljs-number">16</span>);
   }

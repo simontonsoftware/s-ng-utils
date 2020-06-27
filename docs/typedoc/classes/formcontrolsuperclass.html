@@ -957,7 +957,7 @@ img { max-width: 100%; }
 				<p>This example allows 2-way binding to a number via <code>[(ngModel)]</code>, <code>[formControl]</code>, or any other technique that leverages the <code>ControlValueAccessor</code> interface.</p>
 				<pre><code class="language-ts"><span class="hljs-meta">@Component</span>({
   template: <span class="hljs-string">`
-    &lt;button (click)="increment()" [disabled]="isDisabled"&gt;{{ counter }}&lt;/button&gt;
+    &lt;button (click)=&quot;increment()&quot; [disabled]=&quot;isDisabled&quot;&gt;{{ counter }}&lt;/button&gt;
   `</span>,
   providers: [provideValueAccessor(CounterComponent)],
 })
@@ -966,16 +966,16 @@ img { max-width: 100%; }
 
   <span class="hljs-comment">// This looks unnecessary, but is required for Angular to provide `Injector`</span>
   <span class="hljs-keyword">constructor</span>(<span class="hljs-params">injector: Injector</span>) {
-    <span class="hljs-keyword">super</span>(injector);
+    <span class="hljs-built_in">super</span>(injector);
   }
 
   handleIncomingValue(value: <span class="hljs-built_in">number</span>) {
-    <span class="hljs-keyword">this</span>.counter = value;
+    <span class="hljs-built_in">this</span>.counter = value;
   }
 
   increment() {
-    <span class="hljs-keyword">this</span>.emitOutgoingValue(++<span class="hljs-keyword">this</span>.counter);
-    <span class="hljs-keyword">this</span>.onTouched();
+    <span class="hljs-built_in">this</span>.emitOutgoingValue(++<span class="hljs-built_in">this</span>.counter);
+    <span class="hljs-built_in">this</span>.onTouched();
   }
 }</code></pre>
 			</div>

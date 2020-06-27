@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/simontonsoftware/s-ng-utils/compare/v2.0.0...v3.0.0) (2020-06-27)
+
+### ⚠ BREAKING CHANGES
+
+- requires micro-dash 8.0
+- requires s-js-utils 7.0
+- requires s-rxjs-utils 4.0
+- requires angular 10
+- requires typescript 3.9
+
+### Features
+
+- upgrade angular ([831fcb5](https://github.com/simontonsoftware/s-ng-utils/commit/831fcb5207cab03ba919fc19760293f7a9ff4af4))
+
+* upgrade other dependencies ([a9cd092](https://github.com/simontonsoftware/s-ng-utils/commit/a9cd092ad84fbf53e93771506c3b6bb0614112b0))
+
 ## [2.0.0](https://github.com/simontonsoftware/s-ng-utils/compare/v1.0.0...v2.0.0) (2020-02-08)
 
 ### ⚠ BREAKING CHANGES

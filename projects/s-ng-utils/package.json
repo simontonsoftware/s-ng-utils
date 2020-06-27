@@ -1,6 +1,6 @@
 {
   "name": "s-ng-utils",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "author": "Simonton Software",
   "repository": "simontonsoftware/s-ng-utils",
   "license": "MIT",
@@ -11,7 +11,5 @@
     "s-js-utils": "^7.0.0",
     "s-rxjs-utils": "^4.0.0"
   },
-  "dependencies": {
-    "tslib": "^2.0.0"
-  }
+  "dependencies": { "tslib": "^2.0.0" }
 }
