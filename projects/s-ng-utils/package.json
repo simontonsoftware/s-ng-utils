@@ -7,9 +7,9 @@
   "peerDependencies": {
     "@angular/common": "^10.0.0",
     "@angular/core": "^10.0.0",
-    "micro-dash": ">=7.0.0 <8.0.0",
-    "s-rxjs-utils": ">=3.0.0 <4.0.0",
-    "s-js-utils": ">=6.0.0 <7.0.0"
+    "micro-dash": "^8.0.0",
+    "s-js-utils": "^7.0.0",
+    "s-rxjs-utils": "^4.0.0"
   },
   "dependencies": {
     "tslib": "^2.0.0"
