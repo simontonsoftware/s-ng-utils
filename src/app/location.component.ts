@@ -1,5 +1,5 @@
-import { Component, Injector } from "@angular/core";
-import { FormControlSuperclass, provideValueAccessor } from "s-ng-utils";
+import { Component, Injector } from '@angular/core';
+import { FormControlSuperclass, provideValueAccessor } from 's-ng-utils';
 
 // used in a stackoverflow answer: https://stackoverflow.com/a/55091023/1836506
 
@@ -9,7 +9,7 @@ interface Location {
 }
 
 @Component({
-  selector: "app-location",
+  selector: 'app-location',
   template: `
     City:
     <input
@@ -31,11 +31,11 @@ export class LocationComponent extends FormControlSuperclass<Location> {
     super(injector);
   }
 
-  handleIncomingValue(value: Location) {
+  handleIncomingValue(value: Location): void {
     this.location = value;
   }
 
-  modifyLocation<K extends keyof Location>(field: K, value: Location[K]) {
+  modifyLocation<K extends keyof Location>(field: K, value: Location[K]): void {
     this.location = { ...this.location, [field]: value };
     this.emitOutgoingValue(this.location);
   }

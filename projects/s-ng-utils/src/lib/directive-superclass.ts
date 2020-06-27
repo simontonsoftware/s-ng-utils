@@ -3,10 +3,10 @@ import {
   Injector,
   OnChanges,
   SimpleChanges,
-} from "@angular/core";
-import { Observable, Subject } from "rxjs";
-import { filter, map, startWith } from "rxjs/operators";
-import { InjectableSuperclass } from "./injectable-superclass";
+} from '@angular/core';
+import { Observable, Subject } from 'rxjs';
+import { filter, map, startWith } from 'rxjs/operators';
+import { InjectableSuperclass } from './injectable-superclass';
 
 /**
  * Extend this when creating a directive (including a component, which is a kind of directive) to gain access to the helpers demonstrated below. **Warning:** You _must_ include a constructor in your subclass.
@@ -59,7 +59,7 @@ export abstract class DirectiveSuperclass extends InjectableSuperclass
     this.changeDetectorRef = injector.get(ChangeDetectorRef);
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     this.inputChanges$.next(
       new Set(Object.getOwnPropertyNames(changes) as Array<keyof this>),
     );
@@ -79,7 +79,10 @@ export abstract class DirectiveSuperclass extends InjectableSuperclass
   /**
    * Binds an observable to one of this directive's instance variables. When the observable emits the instance variable will be updated, and change detection will be triggered to propagate any changes. Use this an an alternative to repeating `| async` multiple times in your template.
    */
-  bindToInstance<K extends keyof this>(key: K, value$: Observable<this[K]>) {
+  bindToInstance<K extends keyof this>(
+    key: K,
+    value$: Observable<this[K]>,
+  ): void {
     this.subscribeTo(value$, (value) => {
       this[key] = value;
       this.changeDetectorRef.markForCheck();

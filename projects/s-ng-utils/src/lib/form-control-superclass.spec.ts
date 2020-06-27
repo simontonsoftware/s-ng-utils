@@ -1,20 +1,20 @@
-import { ChangeDetectionStrategy, Component, Injector } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Injector } from '@angular/core';
 import {
   ComponentFixture,
   ComponentFixtureAutoDetect,
   fakeAsync,
   flushMicrotasks,
   TestBed,
-} from "@angular/core/testing";
-import { FormsModule } from "@angular/forms";
-import { By } from "@angular/platform-browser";
-import { click, find, findButton } from "../test-helpers";
-import { DirectiveSuperclass } from "./directive-superclass";
+} from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
+import { click, find, findButton } from '../test-helpers';
+import { DirectiveSuperclass } from './directive-superclass';
 import {
   FormControlSuperclass,
   provideValueAccessor,
-} from "./form-control-superclass";
-import { InjectableSuperclass } from "./injectable-superclass";
+} from './form-control-superclass';
+import { InjectableSuperclass } from './injectable-superclass';
 
 @Component({
   template: `
@@ -47,20 +47,20 @@ class CounterComponent extends FormControlSuperclass<number> {
     super(injector);
   }
 
-  handleIncomingValue(value: number) {
+  handleIncomingValue(value: number): void {
     this.counter = value;
   }
 
-  increment() {
+  increment(): void {
     this.emitOutgoingValue(++this.counter);
     this.onTouched();
   }
 }
 
-describe("FormControlSuperclass", () => {
+describe('FormControlSuperclass', () => {
   let fixture: ComponentFixture<TestComponent>;
 
-  function init(initialAttrs?: Partial<TestComponent>) {
+  function init(initialAttrs?: Partial<TestComponent>): void {
     TestBed.configureTestingModule({
       imports: [FormsModule],
       declarations: [CounterComponent, TestComponent],
@@ -72,34 +72,34 @@ describe("FormControlSuperclass", () => {
     flushMicrotasks();
   }
 
-  function incrementButton() {
-    return find<HTMLButtonElement>(fixture, "s-counter-component button");
+  function incrementButton(): HTMLButtonElement {
+    return find<HTMLButtonElement>(fixture, 's-counter-component button');
   }
 
-  function toggleDisabledButton() {
-    return findButton(fixture, "Toggle Disabled");
+  function toggleDisabledButton(): HTMLButtonElement {
+    return findButton(fixture, 'Toggle Disabled');
   }
 
   ///////
 
-  it("provides help for 2-way binding", fakeAsync(() => {
+  it('provides help for 2-way binding', fakeAsync(() => {
     init({ value: 15 });
     expect(fixture.componentInstance.value).toBe(15);
-    expect(fixture.nativeElement.innerText).toContain("15");
+    expect(fixture.nativeElement.innerText).toContain('15');
 
     click(incrementButton());
     expect(fixture.componentInstance.value).toBe(16);
-    expect(fixture.nativeElement.innerText).toContain("16");
+    expect(fixture.nativeElement.innerText).toContain('16');
   }));
 
-  it("provides help for `onTouched`", fakeAsync(() => {
+  it('provides help for `onTouched`', fakeAsync(() => {
     init();
-    expect(fixture.nativeElement.innerText).not.toContain("Touched!");
+    expect(fixture.nativeElement.innerText).not.toContain('Touched!');
     click(incrementButton());
-    expect(fixture.nativeElement.innerText).toContain("Touched!");
+    expect(fixture.nativeElement.innerText).toContain('Touched!');
   }));
 
-  it("provides help for `[disabled]`", fakeAsync(() => {
+  it('provides help for `[disabled]`', fakeAsync(() => {
     init({ shouldDisable: true });
     expect(incrementButton().disabled).toBe(true);
 
@@ -107,7 +107,7 @@ describe("FormControlSuperclass", () => {
     expect(incrementButton().disabled).toBe(false);
   }));
 
-  it("has the right class hierarchy", fakeAsync(() => {
+  it('has the right class hierarchy', fakeAsync(() => {
     init();
     const counter = fixture.debugElement.query(By.directive(CounterComponent))
       .componentInstance;

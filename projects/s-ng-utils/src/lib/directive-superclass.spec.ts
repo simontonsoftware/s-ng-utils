@@ -4,20 +4,20 @@ import {
   Inject,
   Injector,
   Input,
-} from "@angular/core";
+} from '@angular/core';
 import {
   ComponentFixture,
   ComponentFixtureAutoDetect,
   fakeAsync,
   flushMicrotasks,
   TestBed,
-} from "@angular/core/testing";
-import { By } from "@angular/platform-browser";
-import { BehaviorSubject, combineLatest, Observable } from "rxjs";
-import { map } from "rxjs/operators";
-import { expectSingleCallAndReset } from "s-ng-dev-utils";
-import { click, find, findButton } from "../test-helpers";
-import { DirectiveSuperclass } from "./directive-superclass";
+} from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { expectSingleCallAndReset } from 's-ng-dev-utils';
+import { click, find, findButton } from '../test-helpers';
+import { DirectiveSuperclass } from './directive-superclass';
 
 @Component({
   template: `
@@ -35,21 +35,19 @@ import { DirectiveSuperclass } from "./directive-superclass";
   `,
 })
 class TestComponent {
-  color$ = new BehaviorSubject<string>("Green");
+  color$ = new BehaviorSubject<string>('Green');
   prefix?: string;
   prefix2?: string;
   hide = false;
 
-  toggle(key: "prefix" | "prefix2", value: string) {
+  toggle(key: 'prefix' | 'prefix2', value: string): void {
     this[key] = this[key] ? undefined : value;
   }
 }
 
 @Component({
-  selector: "s-color-text",
-  template: `
-    <span [style.background]="color">{{ color }}</span>
-  `,
+  selector: 's-color-text',
+  template: ` <span [style.background]="color">{{ color }}</span> `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ColorTextComponent extends DirectiveSuperclass {
@@ -59,32 +57,32 @@ class ColorTextComponent extends DirectiveSuperclass {
   color!: string;
 
   constructor(
-    @Inject("color$") color$: Observable<string>,
+    @Inject('color$') color$: Observable<string>,
     injector: Injector,
   ) {
     super(injector);
     this.bindToInstance(
-      "color",
+      'color',
       combineLatest([
-        this.getInput$("prefix"),
-        this.getInput$("prefix2"),
+        this.getInput$('prefix'),
+        this.getInput$('prefix2'),
         color$,
-      ]).pipe(map((parts) => parts.filter((p) => p).join(""))),
+      ]).pipe(map((parts) => parts.filter((p) => p).join(''))),
     );
   }
 }
 
-describe("DirectiveSuperclass", () => {
+describe('DirectiveSuperclass', () => {
   let fixture: ComponentFixture<TestComponent>;
   let color$: BehaviorSubject<string>;
   let colorTextComponent: ColorTextComponent;
 
-  function init(initialAttrs?: Partial<TestComponent>) {
-    color$ = new BehaviorSubject("Grey");
+  function init(initialAttrs?: Partial<TestComponent>): void {
+    color$ = new BehaviorSubject('Grey');
     TestBed.configureTestingModule({
       declarations: [ColorTextComponent, TestComponent],
       providers: [
-        { provide: "color$", useValue: color$ },
+        { provide: 'color$', useValue: color$ },
         { provide: ComponentFixtureAutoDetect, useValue: true },
       ],
     });
@@ -97,51 +95,51 @@ describe("DirectiveSuperclass", () => {
     ).componentInstance;
   }
 
-  function darkButton() {
-    return findButton(fixture, "Dark");
+  function darkButton(): HTMLButtonElement {
+    return findButton(fixture, 'Dark');
   }
 
-  function slateButton() {
-    return findButton(fixture, "Slate");
+  function slateButton(): HTMLButtonElement {
+    return findButton(fixture, 'Slate');
   }
 
-  function bothButton() {
-    return findButton(fixture, "Both");
+  function bothButton(): HTMLButtonElement {
+    return findButton(fixture, 'Both');
   }
 
-  function hideButton() {
-    return findButton(fixture, "Hide");
+  function hideButton(): HTMLButtonElement {
+    return findButton(fixture, 'Hide');
   }
 
-  function colorSpan() {
-    return find<HTMLSpanElement>(fixture, "s-color-text span");
+  function colorSpan(): HTMLSpanElement {
+    return find<HTMLSpanElement>(fixture, 's-color-text span');
   }
 
   /////////
 
-  describe(".inputChanges$", () => {
-    it("emits the keys that change", fakeAsync(() => {
+  describe('.inputChanges$', () => {
+    it('emits the keys that change', fakeAsync(() => {
       init();
       const stub = jasmine.createSpy();
       colorTextComponent.inputChanges$.subscribe(stub);
       expect(stub).not.toHaveBeenCalled();
 
       click(darkButton());
-      expectSingleCallAndReset(stub, new Set(["prefix"]));
+      expectSingleCallAndReset(stub, new Set(['prefix']));
 
       click(slateButton());
-      expectSingleCallAndReset(stub, new Set(["prefix2"]));
+      expectSingleCallAndReset(stub, new Set(['prefix2']));
 
       click(bothButton());
-      expectSingleCallAndReset(stub, new Set(["prefix", "prefix2"]));
+      expectSingleCallAndReset(stub, new Set(['prefix', 'prefix2']));
     }));
   });
 
-  describe(".getInput$()", () => {
-    it("emits the value of an input when it changes", fakeAsync(() => {
+  describe('.getInput$()', () => {
+    it('emits the value of an input when it changes', fakeAsync(() => {
       init();
       const stub = jasmine.createSpy();
-      colorTextComponent.getInput$("prefix2").subscribe(stub);
+      colorTextComponent.getInput$('prefix2').subscribe(stub);
       expect(stub).toHaveBeenCalledTimes(1);
       expect(stub.calls.argsFor(0)).toEqual([undefined]);
 
@@ -150,7 +148,7 @@ describe("DirectiveSuperclass", () => {
 
       click(slateButton());
       expect(stub).toHaveBeenCalledTimes(2);
-      expect(stub.calls.argsFor(1)).toEqual(["Slate"]);
+      expect(stub.calls.argsFor(1)).toEqual(['Slate']);
 
       click(bothButton());
       expect(stub).toHaveBeenCalledTimes(3);
@@ -158,49 +156,49 @@ describe("DirectiveSuperclass", () => {
     }));
 
     // https://github.com/simontonsoftware/s-ng-utils/issues/10
-    it("emits `undefined` for unspecified inputs", fakeAsync(() => {
+    it('emits `undefined` for unspecified inputs', fakeAsync(() => {
       init();
       const stub = jasmine.createSpy();
-      colorTextComponent.getInput$("unspecified").subscribe(stub);
+      colorTextComponent.getInput$('unspecified').subscribe(stub);
       expectSingleCallAndReset(stub, undefined);
     }));
   });
 
-  describe(".bindToInstance()", () => {
-    it("sets the local value", fakeAsync(() => {
+  describe('.bindToInstance()', () => {
+    it('sets the local value', fakeAsync(() => {
       init();
-      expect(colorSpan().innerText).toBe("Grey");
-      expect(colorSpan().style.backgroundColor).toBe("grey");
+      expect(colorSpan().innerText).toBe('Grey');
+      expect(colorSpan().style.backgroundColor).toBe('grey');
 
       click(darkButton());
-      expect(colorSpan().innerText).toBe("DarkGrey");
-      expect(colorSpan().style.backgroundColor).toBe("darkgrey");
+      expect(colorSpan().innerText).toBe('DarkGrey');
+      expect(colorSpan().style.backgroundColor).toBe('darkgrey');
 
       click(slateButton());
-      expect(colorSpan().innerText).toBe("DarkSlateGrey");
-      expect(colorSpan().style.backgroundColor).toBe("darkslategrey");
+      expect(colorSpan().innerText).toBe('DarkSlateGrey');
+      expect(colorSpan().style.backgroundColor).toBe('darkslategrey');
 
       click(bothButton());
-      expect(colorSpan().innerText).toBe("Grey");
-      expect(colorSpan().style.backgroundColor).toBe("grey");
+      expect(colorSpan().innerText).toBe('Grey');
+      expect(colorSpan().style.backgroundColor).toBe('grey');
     }));
 
-    it("triggers change detection", fakeAsync(() => {
+    it('triggers change detection', fakeAsync(() => {
       init();
 
-      color$.next("Blue");
+      color$.next('Blue');
       fixture.detectChanges();
-      expect(colorSpan().innerText).toBe("Blue");
-      expect(colorSpan().style.backgroundColor).toBe("blue");
+      expect(colorSpan().innerText).toBe('Blue');
+      expect(colorSpan().style.backgroundColor).toBe('blue');
 
       click(bothButton());
-      expect(colorSpan().innerText).toBe("DarkSlateBlue");
-      expect(colorSpan().style.backgroundColor).toBe("darkslateblue");
+      expect(colorSpan().innerText).toBe('DarkSlateBlue');
+      expect(colorSpan().style.backgroundColor).toBe('darkslateblue');
     }));
   });
 
-  describe(".subscribeTo()", () => {
-    it("cleans up subscriptions", fakeAsync(() => {
+  describe('.subscribeTo()', () => {
+    it('cleans up subscriptions', fakeAsync(() => {
       init();
       expect(color$.observers.length).toBe(1);
 

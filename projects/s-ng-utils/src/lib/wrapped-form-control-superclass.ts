@@ -1,6 +1,6 @@
-import { Injector } from "@angular/core";
-import { FormControl } from "@angular/forms";
-import { FormControlSuperclass } from "./form-control-superclass";
+import { Injector } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { FormControlSuperclass } from './form-control-superclass';
 
 /**
  * Extend this when creating a form control that simply wraps an existing form control, to reduce a lot of boilerplate. **Warning:** You _must_ include a constructor in your subclass.
@@ -62,12 +62,12 @@ export abstract class WrappedFormControlSuperclass<
   }
 
   /** Called as angular propagates values changes to this `ControlValueAccessor`. You normally do not need to use it. */
-  handleIncomingValue(value: OuterType) {
+  handleIncomingValue(value: OuterType): void {
     this.formControl.setValue(this.outerToInner(value), { emitEvent: false });
   }
 
   /** Called as angular propagates disabled changes to this `ControlValueAccessor`. You normally do not need to use it. */
-  setDisabledState(isDisabled: boolean) {
+  setDisabledState(isDisabled: boolean): void {
     if (isDisabled) {
       this.formControl.disable({ emitEvent: false });
     } else {

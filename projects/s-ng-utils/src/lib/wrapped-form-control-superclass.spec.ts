@@ -1,21 +1,21 @@
-import { ChangeDetectionStrategy, Component, Injector } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Injector } from '@angular/core';
 import {
   ComponentFixture,
   ComponentFixtureAutoDetect,
   fakeAsync,
   flushMicrotasks,
   TestBed,
-} from "@angular/core/testing";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { By } from "@angular/platform-browser";
-import { click, find, findButton, setValue } from "../test-helpers";
-import { DirectiveSuperclass } from "./directive-superclass";
+} from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
+import { click, find, findButton, setValue } from '../test-helpers';
+import { DirectiveSuperclass } from './directive-superclass';
 import {
   FormControlSuperclass,
   provideValueAccessor,
-} from "./form-control-superclass";
-import { InjectableSuperclass } from "./injectable-superclass";
-import { WrappedFormControlSuperclass } from "./wrapped-form-control-superclass";
+} from './form-control-superclass';
+import { InjectableSuperclass } from './injectable-superclass';
+import { WrappedFormControlSuperclass } from './wrapped-form-control-superclass';
 
 @Component({
   template: `
@@ -33,16 +33,14 @@ import { WrappedFormControlSuperclass } from "./wrapped-form-control-superclass"
 })
 class TestComponent {
   emissions = 0;
-  string = "";
+  string = '';
   date = new Date();
   shouldDisable = false;
 }
 
 @Component({
   selector: `s-string-component`,
-  template: `
-    <input [formControl]="formControl" />
-  `,
+  template: ` <input [formControl]="formControl" /> `,
   providers: [provideValueAccessor(StringComponent)],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -54,9 +52,7 @@ class StringComponent extends WrappedFormControlSuperclass<string> {
 
 @Component({
   selector: `s-date-component`,
-  template: `
-    <input type="datetime-local" [formControl]="formControl" />
-  `,
+  template: ` <input type="datetime-local" [formControl]="formControl" /> `,
   providers: [provideValueAccessor(DateComponent)],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -66,21 +62,21 @@ class DateComponent extends WrappedFormControlSuperclass<Date, string> {
   }
 
   protected innerToOuter(value: string): Date {
-    return new Date(value + "Z");
+    return new Date(value + 'Z');
   }
 
   protected outerToInner(value: Date): string {
     if (value === null) {
-      return ""; // happens during initialization
+      return ''; // happens during initialization
     }
     return value.toISOString().substr(0, 16);
   }
 }
 
-describe("WrappedFormControlSuperclass", () => {
+describe('WrappedFormControlSuperclass', () => {
   let fixture: ComponentFixture<TestComponent>;
 
-  function init(initialAttrs?: Partial<TestComponent>) {
+  function init(initialAttrs?: Partial<TestComponent>): void {
     TestBed.configureTestingModule({
       imports: [FormsModule, ReactiveFormsModule],
       declarations: [DateComponent, StringComponent, TestComponent],
@@ -92,46 +88,46 @@ describe("WrappedFormControlSuperclass", () => {
     flushMicrotasks();
   }
 
-  function stringInput() {
-    return find<HTMLInputElement>(fixture, "s-string-component input");
+  function stringInput(): HTMLInputElement {
+    return find<HTMLInputElement>(fixture, 's-string-component input');
   }
 
-  function dateInput() {
-    return find<HTMLInputElement>(fixture, "s-date-component input");
+  function dateInput(): HTMLInputElement {
+    return find<HTMLInputElement>(fixture, 's-date-component input');
   }
 
-  function toggleDisabledButton() {
-    return findButton(fixture, "Toggle Disabled");
+  function toggleDisabledButton(): HTMLButtonElement {
+    return findButton(fixture, 'Toggle Disabled');
   }
 
   ///////
 
-  it("provides help for 2-way binding", fakeAsync(() => {
-    init({ string: "initial value" });
-    expect(stringInput().value).toBe("initial value");
+  it('provides help for 2-way binding', fakeAsync(() => {
+    init({ string: 'initial value' });
+    expect(stringInput().value).toBe('initial value');
 
-    setValue(stringInput(), "edited value");
-    expect(fixture.componentInstance.string).toBe("edited value");
+    setValue(stringInput(), 'edited value');
+    expect(fixture.componentInstance.string).toBe('edited value');
   }));
 
-  it("can translate between inner and outer values", fakeAsync(() => {
-    init({ date: new Date("2018-09-03T21:00Z") });
-    expect(dateInput().value).toBe("2018-09-03T21:00");
+  it('can translate between inner and outer values', fakeAsync(() => {
+    init({ date: new Date('2018-09-03T21:00Z') });
+    expect(dateInput().value).toBe('2018-09-03T21:00');
 
-    setValue(dateInput(), "1980-11-04T10:00");
+    setValue(dateInput(), '1980-11-04T10:00');
     expect(fixture.componentInstance.date).toEqual(
-      new Date("1980-11-04T10:00Z"),
+      new Date('1980-11-04T10:00Z'),
     );
   }));
 
-  it("provides help for `onTouched`", fakeAsync(() => {
+  it('provides help for `onTouched`', fakeAsync(() => {
     init();
-    expect(fixture.nativeElement.innerText).not.toContain("Touched!");
-    stringInput().dispatchEvent(new Event("blur"));
-    expect(fixture.nativeElement.innerText).toContain("Touched!");
+    expect(fixture.nativeElement.innerText).not.toContain('Touched!');
+    stringInput().dispatchEvent(new Event('blur'));
+    expect(fixture.nativeElement.innerText).toContain('Touched!');
   }));
 
-  it("provides help for `[disabled]`", fakeAsync(() => {
+  it('provides help for `[disabled]`', fakeAsync(() => {
     init({ shouldDisable: true });
     expect(stringInput().disabled).toBe(true);
 
@@ -142,14 +138,14 @@ describe("WrappedFormControlSuperclass", () => {
     expect(stringInput().disabled).toBe(true);
   }));
 
-  it("does not emit after an incoming change", fakeAsync(() => {
+  it('does not emit after an incoming change', fakeAsync(() => {
     init();
     expect(fixture.componentInstance.emissions).toBe(0);
 
-    setValue(stringInput(), "changed from within");
+    setValue(stringInput(), 'changed from within');
     expect(fixture.componentInstance.emissions).toBe(1);
 
-    fixture.componentInstance.string = "changed from without";
+    fixture.componentInstance.string = 'changed from without';
     fixture.detectChanges();
     flushMicrotasks();
     expect(fixture.componentInstance.emissions).toBe(1);
@@ -159,7 +155,7 @@ describe("WrappedFormControlSuperclass", () => {
     expect(fixture.componentInstance.emissions).toBe(1);
   }));
 
-  it("has the right class hierarchy", fakeAsync(() => {
+  it('has the right class hierarchy', fakeAsync(() => {
     init();
     const component = fixture.debugElement.query(By.directive(StringComponent))
       .componentInstance;
