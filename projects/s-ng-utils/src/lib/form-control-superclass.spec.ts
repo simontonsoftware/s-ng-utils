@@ -1,14 +1,8 @@
 import { ChangeDetectionStrategy, Component, Injector } from '@angular/core';
-import {
-  ComponentFixture,
-  ComponentFixtureAutoDetect,
-  fakeAsync,
-  flushMicrotasks,
-  TestBed,
-} from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { click, find, findButton } from '../test-helpers';
+import { ComponentContext } from '../to-replace/component-context';
 import { DirectiveSuperclass } from './directive-superclass';
 import {
   FormControlSuperclass,
@@ -57,61 +51,68 @@ class CounterComponent extends FormControlSuperclass<number> {
   }
 }
 
-describe('FormControlSuperclass', () => {
-  let fixture: ComponentFixture<TestComponent>;
+class TestComponentContext extends ComponentContext<TestComponent> {
+  protected componentType = TestComponent;
 
-  function init(initialAttrs?: Partial<TestComponent>): void {
-    TestBed.configureTestingModule({
+  constructor() {
+    super({
       imports: [FormsModule],
       declarations: [CounterComponent, TestComponent],
-      providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }],
     });
-    fixture = TestBed.createComponent(TestComponent);
-    Object.assign(fixture.componentInstance, initialAttrs);
-    fixture.detectChanges();
-    flushMicrotasks();
   }
+}
+
+describe('FormControlSuperclass', () => {
+  let ctx: TestComponentContext;
+  beforeEach(() => {
+    ctx = new TestComponentContext();
+  });
 
   function incrementButton(): HTMLButtonElement {
-    return find<HTMLButtonElement>(fixture, 's-counter-component button');
+    return find<HTMLButtonElement>(ctx.fixture, 's-counter-component button');
   }
 
   function toggleDisabledButton(): HTMLButtonElement {
-    return findButton(fixture, 'Toggle Disabled');
+    return findButton(ctx.fixture, 'Toggle Disabled');
   }
 
   ///////
 
-  it('provides help for 2-way binding', fakeAsync(() => {
-    init({ value: 15 });
-    expect(fixture.componentInstance.value).toBe(15);
-    expect(fixture.nativeElement.innerText).toContain('15');
+  it('provides help for 2-way binding', () => {
+    ctx.run({ input: { value: 15 } }, () => {
+      expect(ctx.fixture.componentInstance.value).toBe(15);
+      expect(ctx.fixture.nativeElement.innerText).toContain('15');
 
-    click(incrementButton());
-    expect(fixture.componentInstance.value).toBe(16);
-    expect(fixture.nativeElement.innerText).toContain('16');
-  }));
+      click(incrementButton());
+      expect(ctx.fixture.componentInstance.value).toBe(16);
+      expect(ctx.fixture.nativeElement.innerText).toContain('16');
+    });
+  });
 
-  it('provides help for `onTouched`', fakeAsync(() => {
-    init();
-    expect(fixture.nativeElement.innerText).not.toContain('Touched!');
-    click(incrementButton());
-    expect(fixture.nativeElement.innerText).toContain('Touched!');
-  }));
+  it('provides help for `onTouched`', () => {
+    ctx.run(() => {
+      expect(ctx.fixture.nativeElement.innerText).not.toContain('Touched!');
+      click(incrementButton());
+      expect(ctx.fixture.nativeElement.innerText).toContain('Touched!');
+    });
+  });
 
-  it('provides help for `[disabled]`', fakeAsync(() => {
-    init({ shouldDisable: true });
-    expect(incrementButton().disabled).toBe(true);
+  it('provides help for `[disabled]`', () => {
+    ctx.run({ input: { shouldDisable: true } }, () => {
+      expect(incrementButton().disabled).toBe(true);
 
-    click(toggleDisabledButton());
-    expect(incrementButton().disabled).toBe(false);
-  }));
+      click(toggleDisabledButton());
+      expect(incrementButton().disabled).toBe(false);
+    });
+  });
 
-  it('has the right class hierarchy', fakeAsync(() => {
-    init();
-    const counter = fixture.debugElement.query(By.directive(CounterComponent))
-      .componentInstance;
-    expect(counter instanceof InjectableSuperclass).toBe(true);
-    expect(counter instanceof DirectiveSuperclass).toBe(true);
-  }));
+  it('has the right class hierarchy', () => {
+    ctx.run(() => {
+      const counter = ctx.fixture.debugElement.query(
+        By.directive(CounterComponent),
+      ).componentInstance;
+      expect(counter instanceof InjectableSuperclass).toBe(true);
+      expect(counter instanceof DirectiveSuperclass).toBe(true);
+    });
+  });
 });

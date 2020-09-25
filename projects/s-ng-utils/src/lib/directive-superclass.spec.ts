@@ -5,18 +5,13 @@ import {
   Injector,
   Input,
 } from '@angular/core';
-import {
-  ComponentFixture,
-  ComponentFixtureAutoDetect,
-  fakeAsync,
-  flushMicrotasks,
-  TestBed,
-} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { expectSingleCallAndReset } from 's-ng-dev-utils';
 import { click, find, findButton } from '../test-helpers';
+import { ComponentContext } from '../to-replace/component-context';
 import { DirectiveSuperclass } from './directive-superclass';
 
 @Component({
@@ -35,7 +30,7 @@ import { DirectiveSuperclass } from './directive-superclass';
   `,
 })
 class TestComponent {
-  color$ = new BehaviorSubject<string>('Green');
+  color$ = new BehaviorSubject('Green');
   prefix?: string;
   prefix2?: string;
   hide = false;
@@ -72,138 +67,141 @@ class ColorTextComponent extends DirectiveSuperclass {
   }
 }
 
-describe('DirectiveSuperclass', () => {
-  let fixture: ComponentFixture<TestComponent>;
-  let color$: BehaviorSubject<string>;
-  let colorTextComponent: ColorTextComponent;
+class TestComponentContext extends ComponentContext<TestComponent> {
+  color$ = new BehaviorSubject('Grey');
+  protected componentType = TestComponent;
 
-  function init(initialAttrs?: Partial<TestComponent>): void {
-    color$ = new BehaviorSubject('Grey');
-    TestBed.configureTestingModule({
-      declarations: [ColorTextComponent, TestComponent],
-      providers: [
-        { provide: 'color$', useValue: color$ },
-        { provide: ComponentFixtureAutoDetect, useValue: true },
-      ],
-    });
-    fixture = TestBed.createComponent(TestComponent);
-    Object.assign(fixture.componentInstance, initialAttrs);
-    fixture.detectChanges();
-    flushMicrotasks();
-    colorTextComponent = fixture.debugElement.query(
-      By.directive(ColorTextComponent),
-    ).componentInstance;
+  constructor() {
+    super({ declarations: [ColorTextComponent, TestComponent] });
+    TestBed.overrideProvider('color$', { useValue: this.color$ });
+  }
+}
+
+describe('DirectiveSuperclass', () => {
+  let ctx: TestComponentContext;
+  beforeEach(() => {
+    ctx = new TestComponentContext();
+  });
+
+  function colorTextComponent(): ColorTextComponent {
+    return ctx.fixture.debugElement.query(By.directive(ColorTextComponent))
+      .componentInstance;
   }
 
   function darkButton(): HTMLButtonElement {
-    return findButton(fixture, 'Dark');
+    return findButton(ctx.fixture, 'Dark');
   }
 
   function slateButton(): HTMLButtonElement {
-    return findButton(fixture, 'Slate');
+    return findButton(ctx.fixture, 'Slate');
   }
 
   function bothButton(): HTMLButtonElement {
-    return findButton(fixture, 'Both');
+    return findButton(ctx.fixture, 'Both');
   }
 
   function hideButton(): HTMLButtonElement {
-    return findButton(fixture, 'Hide');
+    return findButton(ctx.fixture, 'Hide');
   }
 
   function colorSpan(): HTMLSpanElement {
-    return find<HTMLSpanElement>(fixture, 's-color-text span');
+    return find<HTMLSpanElement>(ctx.fixture, 's-color-text span');
   }
 
   /////////
 
   describe('.inputChanges$', () => {
-    it('emits the keys that change', fakeAsync(() => {
-      init();
-      const stub = jasmine.createSpy();
-      colorTextComponent.inputChanges$.subscribe(stub);
-      expect(stub).not.toHaveBeenCalled();
+    it('emits the keys that change', () => {
+      ctx.run(() => {
+        const stub = jasmine.createSpy();
+        colorTextComponent().inputChanges$.subscribe(stub);
+        expect(stub).not.toHaveBeenCalled();
 
-      click(darkButton());
-      expectSingleCallAndReset(stub, new Set(['prefix']));
+        click(darkButton());
+        expectSingleCallAndReset(stub, new Set(['prefix']));
 
-      click(slateButton());
-      expectSingleCallAndReset(stub, new Set(['prefix2']));
+        click(slateButton());
+        expectSingleCallAndReset(stub, new Set(['prefix2']));
 
-      click(bothButton());
-      expectSingleCallAndReset(stub, new Set(['prefix', 'prefix2']));
-    }));
+        click(bothButton());
+        expectSingleCallAndReset(stub, new Set(['prefix', 'prefix2']));
+      });
+    });
   });
 
   describe('.getInput$()', () => {
-    it('emits the value of an input when it changes', fakeAsync(() => {
-      init();
-      const stub = jasmine.createSpy();
-      colorTextComponent.getInput$('prefix2').subscribe(stub);
-      expect(stub).toHaveBeenCalledTimes(1);
-      expect(stub.calls.argsFor(0)).toEqual([undefined]);
+    it('emits the value of an input when it changes', () => {
+      ctx.run(() => {
+        const stub = jasmine.createSpy();
+        colorTextComponent().getInput$('prefix2').subscribe(stub);
+        expect(stub).toHaveBeenCalledTimes(1);
+        expect(stub.calls.argsFor(0)).toEqual([undefined]);
 
-      click(darkButton());
-      expect(stub).toHaveBeenCalledTimes(1);
+        click(darkButton());
+        expect(stub).toHaveBeenCalledTimes(1);
 
-      click(slateButton());
-      expect(stub).toHaveBeenCalledTimes(2);
-      expect(stub.calls.argsFor(1)).toEqual(['Slate']);
+        click(slateButton());
+        expect(stub).toHaveBeenCalledTimes(2);
+        expect(stub.calls.argsFor(1)).toEqual(['Slate']);
 
-      click(bothButton());
-      expect(stub).toHaveBeenCalledTimes(3);
-      expect(stub.calls.argsFor(2)).toEqual([undefined]);
-    }));
+        click(bothButton());
+        expect(stub).toHaveBeenCalledTimes(3);
+        expect(stub.calls.argsFor(2)).toEqual([undefined]);
+      });
+    });
 
     // https://github.com/simontonsoftware/s-ng-utils/issues/10
-    it('emits `undefined` for unspecified inputs', fakeAsync(() => {
-      init();
-      const stub = jasmine.createSpy();
-      colorTextComponent.getInput$('unspecified').subscribe(stub);
-      expectSingleCallAndReset(stub, undefined);
-    }));
+    it('emits `undefined` for unspecified inputs', () => {
+      ctx.run(() => {
+        const stub = jasmine.createSpy();
+        colorTextComponent().getInput$('unspecified').subscribe(stub);
+        expectSingleCallAndReset(stub, undefined);
+      });
+    });
   });
 
   describe('.bindToInstance()', () => {
-    it('sets the local value', fakeAsync(() => {
-      init();
-      expect(colorSpan().innerText).toBe('Grey');
-      expect(colorSpan().style.backgroundColor).toBe('grey');
+    it('sets the local value', () => {
+      ctx.run(() => {
+        expect(colorSpan().innerText).toBe('Grey');
+        expect(colorSpan().style.backgroundColor).toBe('grey');
 
-      click(darkButton());
-      expect(colorSpan().innerText).toBe('DarkGrey');
-      expect(colorSpan().style.backgroundColor).toBe('darkgrey');
+        click(darkButton());
+        expect(colorSpan().innerText).toBe('DarkGrey');
+        expect(colorSpan().style.backgroundColor).toBe('darkgrey');
 
-      click(slateButton());
-      expect(colorSpan().innerText).toBe('DarkSlateGrey');
-      expect(colorSpan().style.backgroundColor).toBe('darkslategrey');
+        click(slateButton());
+        expect(colorSpan().innerText).toBe('DarkSlateGrey');
+        expect(colorSpan().style.backgroundColor).toBe('darkslategrey');
 
-      click(bothButton());
-      expect(colorSpan().innerText).toBe('Grey');
-      expect(colorSpan().style.backgroundColor).toBe('grey');
-    }));
+        click(bothButton());
+        expect(colorSpan().innerText).toBe('Grey');
+        expect(colorSpan().style.backgroundColor).toBe('grey');
+      });
+    });
 
-    it('triggers change detection', fakeAsync(() => {
-      init();
+    it('triggers change detection', () => {
+      ctx.run(() => {
+        ctx.color$.next('Blue');
+        ctx.fixture.detectChanges();
+        expect(colorSpan().innerText).toBe('Blue');
+        expect(colorSpan().style.backgroundColor).toBe('blue');
 
-      color$.next('Blue');
-      fixture.detectChanges();
-      expect(colorSpan().innerText).toBe('Blue');
-      expect(colorSpan().style.backgroundColor).toBe('blue');
-
-      click(bothButton());
-      expect(colorSpan().innerText).toBe('DarkSlateBlue');
-      expect(colorSpan().style.backgroundColor).toBe('darkslateblue');
-    }));
+        click(bothButton());
+        expect(colorSpan().innerText).toBe('DarkSlateBlue');
+        expect(colorSpan().style.backgroundColor).toBe('darkslateblue');
+      });
+    });
   });
 
   describe('.subscribeTo()', () => {
-    it('cleans up subscriptions', fakeAsync(() => {
-      init();
-      expect(color$.observers.length).toBe(1);
+    it('cleans up subscriptions', () => {
+      ctx.run(() => {
+        expect(ctx.color$.observers.length).toBe(1);
 
-      click(hideButton());
-      expect(color$.observers.length).toBe(0);
-    }));
+        click(hideButton());
+        expect(ctx.color$.observers.length).toBe(0);
+      });
+    });
   });
 });

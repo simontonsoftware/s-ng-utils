@@ -133,7 +133,8 @@
             "tsConfig": "projects/s-ng-utils/tsconfig.spec.json",
             "karmaConfig": "projects/s-ng-utils/karma.conf.js",
             "sourceMap": true,
-            "codeCoverageExclude": ["**/test.ts", "**/test-helpers.ts"]
+            "codeCoverageExclude": ["**/test.ts", "**/test-helpers.ts"],
+            "polyfills": "projects/s-ng-utils/src/test-polyfills.ts"
           }
         },
         "lint": {
